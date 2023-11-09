@@ -26,6 +26,7 @@
     var squareCheck = null
     var originalPosX = 0
     var originalPosY = 0
+    var boxGrabbed = null
 
     class gridBlock {
         constructor(posX, posY, Width, Height) {
@@ -206,8 +207,9 @@
     canvas.addEventListener('mousedown', (e) => 
     {
         boxes.forEach(box => 
-        {
-            
+        {  
+            box.grabStatus(e)
+            boxGrabbed = boxes[boxes.findIndex( box => box.grab == true)];console.log(boxGrabbed)
             squareGrid.forEach( square => 
             {
                 let check = square.checkHover(e)
