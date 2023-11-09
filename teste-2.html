@@ -19,6 +19,8 @@
     const W = canvas.width;
     const H = canvas.height;
 
+    let phase = 0
+
     const gridSize = 3;
     const pixelSizeX = 250 / gridSize;
     const pixelSizeY = 250 / gridSize;
@@ -133,6 +135,45 @@
 
         }
     }
+
+    class Button{
+        constructor(x,y, w,h, text, phase) {
+            this.x = x
+            this.y = y
+
+            this.w = w
+            this.h = h
+
+            this.text = text
+
+            this.appear = true
+        }
+
+        draw(){
+            if (this.appear){
+                ctx.fillRect(this.x,this.y, this.w,this.h)
+                ctx.fillStyle = 'white'
+                ctx.font = '30px Arial'
+                ctx.textAlign = 'center'
+                ctx.textBaseline = 'middle'
+                ctx.fillText(this.text, this.x + this.w/2, this.y + this.h/2)
+                ctx.fillStyle = 'black'
+            }
+        }
+
+        click(e){
+            if (e.offsetX > this.x && e.offsetX < this.x + this.w && e.offsetY > this.y && e.offsetY < this.y + this.h){
+                this.appear = false
+                phase = this.phase
+                canvas.removeEventListener('click', e=>{
+                    menuBtn.click(e)
+                })
+            }
+        }
+    }
+
+    let buttons = new Array()
+    menuBtn = new Button(W/2-65,H/4*3, 130,50, 'Começar')
 
     let boxes = new Array()
     let colors = ['red', 'green', 'blue']
@@ -296,17 +337,34 @@
 
         
     })
+
+    function drawMenu(){
+        ctx.fillStyle = 'black'
+        ctx.font = '30px Arial'
+        ctx.textAlign = 'center'
+        ctx.textBaseline = 'middle'
+        ctx.fillText('Construção de um Circuito', W/2, H/4)
+        
+        menuBtn.draw()
+    }
+    canvas.addEventListener('click', e=>{
+        menuBtn.click(e)
+    })
     
     
     setInterval(() => 
     {
         ctx.clearRect(0, 0, W, H);
-        squareGrid.forEach(square => {
-            square.draw();
-        });
-        boxes.forEach(box => {
-            box.draw()
-        });
+        if (phase != 0) {
+            squareGrid.forEach(square => {
+                square.draw();
+            });
+            boxes.forEach(box => {
+                box.draw()
+            });
+        } else {
+            drawMenu()
+        }
     }, 1);
 
     window.onload = () => generateTable()
