@@ -8,9 +8,7 @@
 <body>
     <div style="display: flex; flex-direction: row;">
         <canvas width="500" height="500" style="border: 2px solid black;"></canvas>
-        <table id = "tabela">
-    
-        </table>
+        <table id="tabela"></table>
     </div>
 
 </body>
@@ -24,6 +22,9 @@
     const gridSize = 5;
     const pixelSizeX = 250 / gridSize;
     const pixelSizeY = 250 / gridSize;
+
+    var originalPosX = 0
+    var originalPosY = 0
 
     class gridBlock {
         constructor(posX, posY, Width, Height) {
@@ -228,11 +229,16 @@
                 squareGrid.forEach(square => 
                 {
                     let check = square.checkHover(e)
+                    let squareCheck = squareGrid[`${squareGrid.findIndex( square => square.x == check[0] && square.y == check[1])}`]
                     if (box.grab == true && check)
                     {
-                        box.lockStatus()
-                        //console.log(`${squareGrid.findIndex( square => square.x == check[0] && square.y == check[1])}`)
-                        squareGrid[`${squareGrid.findIndex( square => square.x == check[0] && square.y == check[1])}`].available = false
+                        if (squareCheck.available == true)
+                        {
+                            box.lockStatus()
+                            //console.log(`${squareGrid.findIndex( square => square.x == check[0] && square.y == check[1])}`)
+                            squareCheck.available = false
+                        }
+
                     }
                 })
                 box.grab = false
@@ -281,15 +287,15 @@
 
     function generateTable() 
     {
-        console.log("generating table...");
-        let tbl = document.getElementById("tabela")
+        let tbl = document.getElementById("tabela");console.log(tbl);
         if (tbl.innerHTML != "")
         {
             tbl.innerHTML = ""
         }
 
+        
         // creates a <table> element and a <tbody> element
-        const tblBody = document.createElement("tbody");
+        //const tblBody = document.createElement("tbody");
         //console.log(squareGrid)
         let repeat = Math.sqrt(squareGrid.length)
 
@@ -302,9 +308,6 @@
             for (let j = 0; j < repeat; j++) 
             {
                 let tblAvailable = squareGrid[`${squareGrid.findIndex( square => square.x == (50 + pixelSizeX * j) && square.y == (50 + pixelSizeY * i))}`]
-                // Create a <td> element and a text node, make the text
-                // node the contents of the <td>, and put the <td> at
-                // the end of the table row
                 const cell = document.createElement("td");
                 if (tblAvailable.available == true)
                 {
@@ -315,21 +318,16 @@
                     cell.style.backgroundColor = "red"
 
                 }
-                cell.style.width = (50) + "px"
-                cell.style.height = (150/3) + "px"
+                cell.style.width = (100) + "px"
+                cell.style.height = (50) + "px"
                 row.appendChild(cell);
             }
 
             // add the row to the end of the table body
-            tblBody.appendChild(row);
+            tbl.appendChild(row);
         }
-
-            // put the <tbody> in the <table>
-            tbl.appendChild(tblBody);
-            // appends <table> into <body>
-            document.body.appendChild(tbl);
-            // sets the border attribute of tbl to '2'
             tbl.setAttribute("border", "2");
+        
     }
 
 
