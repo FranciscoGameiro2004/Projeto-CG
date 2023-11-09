@@ -147,18 +147,25 @@
         }
 
         draw(){
-            ctx.fillRect(this.x,this.y, this.w,this.h)
-            ctx.fillStyle = 'white'
-            ctx.font = '30px Arial'
-            ctx.textAlign = 'center'
-            ctx.textBaseline = 'middle'
-            ctx.fillText(this.text, this.x + this.w/2, this.y + this.h/2)
-            ctx.fillStyle = 'black'
+            if (this.appear){
+                ctx.fillRect(this.x,this.y, this.w,this.h)
+                ctx.fillStyle = 'white'
+                ctx.font = '30px Arial'
+                ctx.textAlign = 'center'
+                ctx.textBaseline = 'middle'
+                ctx.fillText(this.text, this.x + this.w/2, this.y + this.h/2)
+                ctx.fillStyle = 'black'
+            }
         }
 
         click(e){
-            this.appear = false
-            phase = this.phase
+            if (e.offsetX > this.x && e.offsetX < this.x + this.w && e.offsetY > this.y && e.offsetY < this.y + this.h){
+                this.appear = false
+                phase = this.phase
+                canvas.removeEventListener('click', e=>{
+                    menuBtn.click(e)
+                })
+            }
         }
     }
 
@@ -309,6 +316,10 @@
         
         menuBtn.draw()
     }
+
+    canvas.addEventListener('click', e=>{
+        menuBtn.click(e)
+    })
 
     setInterval(() => 
     {
