@@ -25,6 +25,8 @@
     const pixelSizeX = 250 / gridSize;
     const pixelSizeY = 250 / gridSize;
 
+    let phase = 1
+
     class gridBlock {
         constructor(posX, posY, Width, Height) {
             this.x = posX;
@@ -266,15 +268,26 @@
         
     })
     
+    function drawMenu(){
+        ctx.font = '30px Arial'
+        ctx.textAlign = 'center'
+        ctx.textBaseline = 'middle'
+        ctx.fillText('Contrução de um Circuito', W/2, H/4)
+    }
+
     setInterval(() => 
     {
         ctx.clearRect(0, 0, W, H);
-        squareGrid.forEach(square => {
-            square.draw();
-        });
-        boxes.forEach(box => {
-            box.draw()
-        });
+        if (phase != 0){
+            squareGrid.forEach(square => {
+                square.draw();
+            });
+            boxes.forEach(box => {
+                box.draw()
+            });
+        } else {
+            drawMenu()
+        }
     }, 1);
 
     window.onload = () => generateTable()
