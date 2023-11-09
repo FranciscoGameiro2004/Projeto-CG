@@ -19,10 +19,11 @@
     const W = canvas.width;
     const H = canvas.height;
 
-    const gridSize = 5;
+    const gridSize = 3;
     const pixelSizeX = 250 / gridSize;
     const pixelSizeY = 250 / gridSize;
 
+    var squareCheck = null
     var originalPosX = 0
     var originalPosY = 0
 
@@ -162,7 +163,7 @@
                     {
                         if (box.grab)
                         {
-                            console.log(`${square.available} | ${check}`)
+                            //console.log(`${square.available} | ${check}`)
                             
                             box.xLock = check[0]; 
                             box.yLock = check[1];
@@ -206,18 +207,22 @@
     {
         boxes.forEach(box => 
         {
-            box.grabStatus(e)
+            
             squareGrid.forEach( square => 
             {
                 let check = square.checkHover(e)
                 if(box.grab == true && check)
                 {
-                    //console.log(check)
-                    //console.table(squareGrid[`${squareGrid.findIndex( square => square.x == check[0] && square.y == check[1])}`])
+                    let check = square.checkHover(e);//console.log(check);
+                    if (check != null)
+                    {
+                        squareCheck = squareGrid[`${squareGrid.findIndex( square => square.x == check[0] && square.y == check[1])}`];
+                    }
                     squareGrid[`${squareGrid.findIndex( square => square.x == check[0] && square.y == check[1])}`].available = true
                 }
             })
         });
+
     })
 
     canvas.addEventListener('mouseup', (e) =>
@@ -228,8 +233,14 @@
             {
                 squareGrid.forEach(square => 
                 {
-                    let check = square.checkHover(e)
-                    let squareCheck = squareGrid[`${squareGrid.findIndex( square => square.x == check[0] && square.y == check[1])}`]
+                    let check = square.checkHover(e);//console.log(check);
+                    if (check != null)
+                    {
+                        squareCheck = squareGrid[`${squareGrid.findIndex( square => square.x == check[0] && square.y == check[1])}`];
+                    }
+                    let boxGrabbed = boxes[`${boxes.findIndex(box => box.grab == true)}`]                   
+
+
                     if (box.grab == true && check)
                     {
                         if (squareCheck.available == true)
@@ -237,6 +248,11 @@
                             box.lockStatus()
                             //console.log(`${squareGrid.findIndex( square => square.x == check[0] && square.y == check[1])}`)
                             squareCheck.available = false
+                        }
+                        else
+                        {
+                            boxGrabbed.x=originalPosX
+                            boxGrabbed.y=originalPosY
                         }
 
                     }
@@ -262,15 +278,18 @@
     {
         //console.clear()
         squareGrid.forEach(square => 
-                {
-                    let check = square.checkHover(e)
-                    if (check)
-                    {
-                        console.table(squareGrid[`${squareGrid.findIndex( square => square.x == check[0] && square.y == check[1])}`])
-                    }
-                })
+        {
+            let check = square.checkHover(e)
+            if (check != null)
+            {
+                squareCheck = squareGrid[`${squareGrid.findIndex( square => square.x == check[0] && square.y == check[1])}`];
+            }
+        })
+        console.table(squareCheck)
+
         
     })
+    
     
     setInterval(() => 
     {
@@ -287,7 +306,7 @@
 
     function generateTable() 
     {
-        let tbl = document.getElementById("tabela");console.log(tbl);
+        let tbl = document.getElementById("tabela");//console.log(tbl);
         if (tbl.innerHTML != "")
         {
             tbl.innerHTML = ""
