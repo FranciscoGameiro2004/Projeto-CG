@@ -210,6 +210,11 @@
         {  
             box.grabStatus(e)
             boxGrabbed = boxes[boxes.findIndex( box => box.grab == true)];console.log(boxGrabbed)
+            if (box.grab == true)
+            {
+                originalPosX = boxGrabbed.x
+                originalPosY = boxGrabbed.y
+            }
             squareGrid.forEach( square => 
             {
                 let check = square.checkHover(e)
