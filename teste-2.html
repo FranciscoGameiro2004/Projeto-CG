@@ -25,7 +25,7 @@
     const pixelSizeX = 250 / gridSize;
     const pixelSizeY = 250 / gridSize;
 
-    let phase = 1
+    let phase = 0
 
     class gridBlock {
         constructor(posX, posY, Width, Height) {
@@ -132,6 +132,38 @@
 
         }
     }
+
+    class Button{
+        constructor(x,y, w,h, text, phase) {
+            this.x = x
+            this.y = y
+
+            this.w = w
+            this.h = h
+
+            this.text = text
+
+            this.appear = true
+        }
+
+        draw(){
+            ctx.fillRect(this.x,this.y, this.w,this.h)
+            ctx.fillStyle = 'white'
+            ctx.font = '30px Arial'
+            ctx.textAlign = 'center'
+            ctx.textBaseline = 'middle'
+            ctx.fillText(this.text, this.x + this.w/2, this.y + this.h/2)
+            ctx.fillStyle = 'black'
+        }
+
+        click(e){
+            this.appear = false
+            phase = this.phase
+        }
+    }
+
+    let buttons = new Array()
+    menuBtn = new Button(W/2-65,H/4*3, 130,50, 'Começar')
 
     let boxes = new Array()
     let colors = ['red', 'green', 'blue']
@@ -269,10 +301,13 @@
     })
     
     function drawMenu(){
+        ctx.fillStyle = 'black'
         ctx.font = '30px Arial'
         ctx.textAlign = 'center'
         ctx.textBaseline = 'middle'
-        ctx.fillText('Contrução de um Circuito', W/2, H/4)
+        ctx.fillText('Construção de um Circuito', W/2, H/4)
+        
+        menuBtn.draw()
     }
 
     setInterval(() => 
