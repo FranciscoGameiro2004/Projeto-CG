@@ -103,6 +103,7 @@ class Box{
         this.h = Height
 
         this.grab = false
+        this.onGrid = false
     }
 
     draw(){
@@ -145,6 +146,8 @@ class Box{
             
             this.xLock = null
             this.yLock = null
+
+            this.onGrid = true
         }
 
     }
@@ -274,6 +277,7 @@ canvas.addEventListener('mousedown', (e) =>
             {
                 originalPosX = boxGrabbed.x
                 originalPosY = boxGrabbed.y
+                boxGrabbed.onGrid = false
             }
             squareGrid.forEach( square => 
             {
@@ -321,7 +325,10 @@ canvas.addEventListener('mouseup', (e) =>
                     {
                         boxGrabbed.x=originalPosX
                         boxGrabbed.y=originalPosY
-                        squareGrid[`${squareGrid.findIndex( square => square.x == originalPosX && square.y == originalPosY)}`].available = false;
+                        if(boxGrabbed.onGrid == true)
+                        {
+                            squareGrid[`${squareGrid.findIndex( square => square.x == originalPosX && square.y == originalPosY)}`].available = false;
+                        }
                     }
 
                 }
