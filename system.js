@@ -4,6 +4,7 @@ const W = canvas.width;
 const H = canvas.height;
 
 let phase = 0
+let tutorialText = ''
 let padding = 125
 
 const gridSize = 5;
@@ -129,6 +130,8 @@ class Button{
         this.w = w
         this.h = h
 
+        this.phase = phase
+
         this.text = text
 
         this.appear = true
@@ -158,7 +161,7 @@ class Button{
 }
 
 let buttons = new Array()
-menuBtn = new Button(W/2-65,H/4*3, 130,50, 'Começar')
+menuBtn = new Button(W/2-65,H/4*3, 130,50, 'Começar', 1)
 
 let boxes = new Array()
 let colors = ['red', 'green', 'blue']
@@ -345,6 +348,14 @@ setInterval(() =>
 {
     ctx.clearRect(0, 0, W, H);
     if (phase != 0) {
+        if (phase == 1){
+            tutorialText = 'Coloque os componentes nas suas áreas'
+        } else if (phase == 2){
+            tutorialText = 'Conecte os componentes'
+        } else {
+            tutorialText = ''
+        }
+        generateText(tutorialText, W/2, 75)
         squareGrid.forEach(square => {
             square.draw();
         });
@@ -401,5 +412,14 @@ function generateTable()
         tbl.setAttribute("border", "2");
     
 }
+
+function generateText(text, x,y){
+    ctx.fillStyle = 'black'
+    ctx.font = '20px Arial'
+    ctx.textAlign = 'center'
+    ctx.textBaseline = 'middle'
+    ctx.fillText(text, x, y)
+}
+
 generateTable()
 
