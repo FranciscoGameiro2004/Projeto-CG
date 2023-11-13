@@ -3,6 +3,8 @@ const ctx = canvas.getContext('2d');
 const W = canvas.width;
 const H = canvas.height;
 
+const componentProperties = document.querySelector('#componentProperties')
+
 let phase = 0
 let tutorialText = ''
 let padding = 125
@@ -334,7 +336,7 @@ canvas.addEventListener("click", (e) =>
 
 function drawMenu(){
     ctx.fillStyle = 'black'
-    ctx.font = '30px Arial'
+    ctx.font = '30px Arial Black'
     ctx.textAlign = 'center'
     ctx.textBaseline = 'middle'
     ctx.fillText('Construção de um Circuito', W/2, H/4)
@@ -367,6 +369,11 @@ setInterval(() =>
     } else {
         drawMenu()
 
+    }
+    if (phase < 3) {
+        componentProperties.style.visibility = 'collapse'
+    } else {
+        componentProperties.style.visibility = 'visible'
     }
 }, 1);
 
