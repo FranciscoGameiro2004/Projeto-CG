@@ -7,7 +7,7 @@ let phase = 0
 let tutorialText = ''
 let padding = 125
 
-const gridSize = 5;
+const gridSize = 3;
 const pixelSizeX = 250 / gridSize;
 const pixelSizeY = 250 / gridSize;
 
@@ -278,7 +278,7 @@ canvas.addEventListener('mouseup', (e) =>
                 {
                     squareCheck = squareGrid[`${squareGrid.findIndex( square => square.x == check[0] && square.y == check[1])}`];
                 }
-                let boxGrabbed = boxes[`${boxes.findIndex(box => box.grab == true)}`]                   
+                let boxGrabbed = boxes[`${boxes.findIndex(box => box.grab == true)}`]
 
 
                 if (box.grab == true && check)
@@ -289,11 +289,11 @@ canvas.addEventListener('mouseup', (e) =>
                         //console.log(`${squareGrid.findIndex( square => square.x == check[0] && square.y == check[1])}`)
                         squareCheck.available = false
                     }
-                    else
+                    else if(squareCheck.available == false)
                     {
                         boxGrabbed.x=originalPosX
                         boxGrabbed.y=originalPosY
-                        //squarechek com originalPos
+                        squareGrid[`${squareGrid.findIndex( square => square.x == originalPosX && square.y == originalPosY)}`].available = false;
                     }
 
                 }
