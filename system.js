@@ -13,6 +13,28 @@ const gridSize = 3;
 const pixelSizeX = 250 / gridSize;
 const pixelSizeY = 250 / gridSize;
 
+
+switchOn = new Image()
+switchOn.src = 'assets/interruptor_aberto.png'
+
+switchOn = new Image()
+switchOn.src = 'assets/interruptor_fechado.png'
+
+battery = new Image()
+battery.src = 'assets/pilha.png'
+
+bulbOn = new Image()
+bulbOn.src = 'assets/lampada_acesa.png'
+
+bulbOff = new Image()
+bulbOff.src = 'assets/lampada_desligada.png'
+
+bulbOn = new Image()
+bulbOn.src = 'assets/lampada_acesa.png'
+
+resistor = new Image()
+resistor.src = 'assets/resistencia.png'
+
 var squareCheck = null
 var originalPosX = 0
 var originalPosY = 0
@@ -64,7 +86,7 @@ class gridBlock {
 }
 
 class Box{
-    constructor(posX,posY, Width,Height, color) {
+    constructor(posX,posY, Width,Height, color, img=null) {
         this.x = posX
         this.y = posY
 
@@ -72,6 +94,7 @@ class Box{
         this.yLock = null
 
         this.color = color
+        this.img = img
 
         this.prevX = posX
         this.prevY = posY
@@ -85,6 +108,9 @@ class Box{
     draw(){
         ctx.fillStyle = this.color
         ctx.fillRect(this.x,this.y, this.w,this.h)
+        if (this.img){
+            ctx.drawImage(this.img, this.x,this.y, this.w,this.h);
+        }
     }
 
     move(e){
@@ -169,7 +195,7 @@ let boxes = new Array()
 let colors = ['red', 'green', 'blue']
 for (let i = 0; i < 3; i++)
 {
-    boxes.push(new Box(125 + i * 100, 400, 50, 50, colors[i]))
+    boxes.push(new Box(125 + i * 100, 400, 50, 50, colors[i], bulbOff))
 }
 
 let squareGrid = new Array();
