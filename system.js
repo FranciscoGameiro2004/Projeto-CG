@@ -290,6 +290,7 @@ canvas.addEventListener('mouseup', (e) =>
                     {
                         boxGrabbed.x=originalPosX
                         boxGrabbed.y=originalPosY
+                        //squarechek com originalPos
                     }
 
                 }
@@ -310,7 +311,7 @@ canvas.addEventListener('mouseup', (e) =>
 
 })
 
-
+/*
 canvas.addEventListener("click", (e) => 
 {
     //console.clear()
@@ -326,6 +327,7 @@ canvas.addEventListener("click", (e) =>
 
     
 })
+*/
 
 function drawMenu(){
     ctx.fillStyle = 'black'
@@ -399,7 +401,5 @@ function generateTable()
         tbl.appendChild(row);
     }
         tbl.setAttribute("border", "2");
-    
 }
 generateTable()
-
