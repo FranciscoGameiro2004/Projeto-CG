@@ -334,7 +334,7 @@ canvas.addEventListener("click", (e) =>
 
 function drawMenu(){
     ctx.fillStyle = 'black'
-    ctx.font = '30px Arial'
+    ctx.font = '30px Arial Black'
     ctx.textAlign = 'center'
     ctx.textBaseline = 'middle'
     ctx.fillText('Construção de um Circuito', W/2, H/4)
