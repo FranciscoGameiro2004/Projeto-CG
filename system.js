@@ -9,9 +9,11 @@ let phase = 0
 let tutorialText = ''
 let padding = 125
 
-const gridSize = 3;
+const gridSize = 2;
 const pixelSizeX = 250 / gridSize;
 const pixelSizeY = 250 / gridSize;
+var xInit = 0; var xEnd = 0;
+var yInit = 0; var yEnd = 0;
 
 
 switchOn = new Image()
@@ -208,7 +210,11 @@ for (let i = 0; i < gridSize; i++)
         squareGrid.push(new gridBlock(padding + pixelSizeX * j, padding + pixelSizeY * i, pixelSizeX, pixelSizeY));
     }
 }
+console.log(squareGrid[0]);
+console.log(squareGrid[squareGrid.length -1])
 
+xInit = squareGrid[0].x; xEnd = squareGrid[squareGrid.length -1].x + pixelSizeX; console.log(`x vai de ${xInit} até ${xEnd}`);
+yInit = squareGrid[0].y; yEnd = squareGrid[squareGrid.length -1].y + pixelSizeY; console.log(`y vai de ${yInit} até ${yEnd}`);
 
 canvas.addEventListener('mousemove', (e) => 
 {
@@ -277,7 +283,7 @@ canvas.addEventListener('mousedown', (e) =>
             {
                 originalPosX = boxGrabbed.x
                 originalPosY = boxGrabbed.y
-                boxGrabbed.onGrid = false
+                
             }
             squareGrid.forEach( square => 
             {
@@ -325,12 +331,11 @@ canvas.addEventListener('mouseup', (e) =>
                     {
                         boxGrabbed.x=originalPosX
                         boxGrabbed.y=originalPosY
-                        if(boxGrabbed.onGrid == true)
+                        if(squareGrid[`${squareGrid.findIndex( square => square.x == originalPosX && square.y == originalPosY)}`] != undefined)
                         {
                             squareGrid[`${squareGrid.findIndex( square => square.x == originalPosX && square.y == originalPosY)}`].available = false;
-                        }
+                        }                   
                     }
-
                 }
             })
             box.grab = false
@@ -353,6 +358,7 @@ canvas.addEventListener('mouseup', (e) =>
 canvas.addEventListener("click", (e) => 
 {
     //console.clear()
+    squareCheck = null
     squareGrid.forEach(square => 
     {
         let check = square.checkHover(e)
@@ -361,8 +367,10 @@ canvas.addEventListener("click", (e) =>
             squareCheck = squareGrid[`${squareGrid.findIndex( square => square.x == check[0] && square.y == check[1])}`];
         }
     })
-    console.table(squareCheck)
-
+    if (squareCheck != null)
+    {
+        console.table(squareCheck)
+    }
     
 })
 */
@@ -463,3 +471,4 @@ function generateText(text, x,y){
 }
 
 generateTable()
+//console.clear()
