@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elementos nos Quatro Lados</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            margin: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        th:hover, td:hover {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<script>
+    // Criar array duplo
+    const arrayDuplo = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9]
+    ];
+
+    function elementosNosQuatroLados(linha, coluna) {
+        let elementos = [];
+
+        // Elemento acima
+        if (linha > 0) {
+            elementos.push(arrayDuplo[linha - 1][coluna]);
+        }
+
+        // Elemento abaixo
+        if (linha < arrayDuplo.length - 1) {
+            elementos.push(arrayDuplo[linha + 1][coluna]);
+        }
+
+        // Elemento à esquerda
+        if (coluna > 0) {
+            elementos.push(arrayDuplo[linha][coluna - 1]);
+        }
+
+        // Elemento à direita
+        if (coluna < arrayDuplo[0].length - 1) {
+            elementos.push(arrayDuplo[linha][coluna + 1]);
+        }
+
+        return elementos;
+    }
+
+    function criarTabela() {
+        let tabelaHTML = '<table>';
+
+        for (let i = 0; i < arrayDuplo.length; i++) {
+            tabelaHTML += '<tr>';
+
+            for (let j = 0; j < arrayDuplo[0].length; j++) {
+                tabelaHTML += `<td onclick="verificarElementos(${i}, ${j})">${arrayDuplo[i][j]}</td>`;
+            }
+
+            tabelaHTML += '</tr>';
+        }
+
+        tabelaHTML += '</table>';
+        document.body.innerHTML += tabelaHTML;
+    }
+
+    function verificarElementos(linha, coluna) {
+        let elementosLados = elementosNosQuatroLados(linha, coluna);
+
+        alert("Elementos nos quatro lados: " + elementosLados.join(', '));
+    }
+
+    // Criar a tabela a partir do array duplo
+    criarTabela();
+</script>
+
+</body>
+</html>
