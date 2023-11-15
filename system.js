@@ -9,7 +9,7 @@ let phase = 0
 let tutorialText = ''
 let padding = 125
 
-const gridSize = 2;
+const gridSize = 5;
 const pixelSizeX = 250 / gridSize;
 const pixelSizeY = 250 / gridSize;
 var xInit = 0; var xEnd = 0;
