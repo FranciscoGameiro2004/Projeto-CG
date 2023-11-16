@@ -89,7 +89,7 @@ class gridBlock {
 }
 
 class Box{
-    constructor(posX,posY, Width,Height, color, img=null,item) {
+    constructor(posX,posY, Width,Height, color=null, img=null,item) {
         this.x = posX
         this.y = posY
 
@@ -112,7 +112,11 @@ class Box{
     }
 
     draw(){
-        ctx.fillStyle = this.color
+        if (this.color){
+            ctx.fillStyle = this.color
+        } else {
+            ctx.fillStyle = 'rgba(0,0,0,0)'
+        }
         ctx.fillRect(this.x,this.y, this.w,this.h)
         if (this.img){
             ctx.drawImage(this.img, this.x,this.y, this.w,this.h);
@@ -200,7 +204,7 @@ let buttons = new Array()
 menuBtn = new Button(W/2-65,H/4*3, 130,50, 'Começar', 1)
 
 let boxes = new Array()
-let colors = ['red', 'green', 'blue']
+let colors = [null, null, null]
 for (let i = 0; i < 3; i++)
 {
     boxes.push(new Box(125 + i * 100, 400, 50, 50, colors[i], bulbOff))
