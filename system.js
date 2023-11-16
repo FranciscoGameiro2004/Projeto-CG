@@ -359,26 +359,27 @@ canvas.addEventListener('mouseup', (e) =>
 
 })
 
-/*
+
 canvas.addEventListener("click", (e) => 
 {
     //console.clear()
-    squareCheck = null
-    squareGrid.forEach(square => 
-    {
-        let check = square.checkHover(e)
-        if (check != null)
+    if (e.ctrlKey) {
+        squareCheck = null
+        squareGrid.forEach(square => 
         {
-            squareCheck = squareGrid[`${squareGrid.findIndex( square => square.x == check[0] && square.y == check[1])}`];
+            let check = square.checkHover(e)
+            if (check != null)
+            {
+                squareCheck = squareGrid[`${squareGrid.findIndex( square => square.x == check[0] && square.y == check[1])}`];
+            }
+        })
+        if (squareCheck != null)
+        {
+            console.table(squareCheck)
         }
-    })
-    if (squareCheck != null)
-    {
-        console.table(squareCheck)
     }
-    
 })
-*/
+
 
 function drawMenu(){
     ctx.fillStyle = 'black'
