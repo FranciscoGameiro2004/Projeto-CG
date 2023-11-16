@@ -201,10 +201,9 @@ menuBtn = new Button(W/2-65,H/4*3, 130,50, 'Começar', 1)
 
 let boxes = new Array()
 let colors = ['red', 'green', 'blue']
-let items = ['battery', 'wire','light']
 for (let i = 0; i < 3; i++)
 {
-    boxes.push(new Box(125 + i * 100, 400, 50, 50, colors[i], bulbOff,items[i]))
+    boxes.push(new Box(125 + i * 100, 400, 50, 50, colors[i], bulbOff))
 }
 
 let squareGrid = new Array();
