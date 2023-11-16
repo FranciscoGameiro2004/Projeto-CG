@@ -88,7 +88,7 @@ class gridBlock {
 }
 
 class Box{
-    constructor(posX,posY, Width,Height, color, img=null) {
+    constructor(posX,posY, Width,Height, color='rgba(0,0,0,256)', img=null) {
         this.x = posX
         this.y = posY
 
@@ -198,9 +198,10 @@ menuBtn = new Button(W/2-65,H/4*3, 130,50, 'Começar', 1)
 
 let boxes = new Array()
 let colors = ['red', 'green', 'blue']
+let compImg = [battery, bulbOff, resistor]
 for (let i = 0; i < 3; i++)
 {
-    boxes.push(new Box(125 + i * 100, 400, 50, 50, colors[i], bulbOff))
+    boxes.push(new Box(125 + i * 100, 400, 50, 50, colors[i], compImg[i]))
 }
 
 let squareGrid = new Array();

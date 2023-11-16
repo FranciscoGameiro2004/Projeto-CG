@@ -3,6 +3,8 @@ class Battery{
         this.boxId = boxId
 
         this.voltage = voltage
+
+        this.componentName = 'Battery'
     }
 }
 
@@ -11,6 +13,7 @@ class Resistor{
         this.boxId = boxId
 
         this.resistanceOhm
+        this.componentName = 'Resistor'
     }
 }
 
@@ -20,6 +23,8 @@ class LightBulb{
 
         this.resistanceOhm
         this.isOn = true
+
+        this.componentName = 'LightBulb'
     }
 
     toggle(){
@@ -32,6 +37,8 @@ class Switch{
         this.boxId = boxId
 
         this.isOn = true
+
+        this.componentName = 'Switch'
     }
 
     toggle(){
