@@ -201,9 +201,10 @@ menuBtn = new Button(W/2-65,H/4*3, 130,50, 'Começar', 1)
 
 let boxes = new Array()
 let colors = ['red', 'green', 'blue']
+let items = ["battery","wire","light"]
 for (let i = 0; i < 3; i++)
 {
-    boxes.push(new Box(125 + i * 100, 400, 50, 50, colors[i], bulbOff))
+    boxes.push(new Box(125 + i * 100, 400, 50, 50, colors[i], bulbOff, items[i]))
 }
 
 let squareGrid = new Array();
@@ -435,7 +436,7 @@ function generateTable()
 
         for (let j = 0; j < repeat; j++) 
         {
-            let tblAvailable = squareGrid[`${squareGrid.findIndex( square => square.x == (padding + pixelSizeX * j) && square.y == (padding + pixelSizeY * i))}`]
+            let tblAvailable = squareGrid[`${squareGrid.findIndex( square => square.x == (padding + pixelSizeX * j) && square.y == (padding + pixelSizeY * i))}`];//console.log(tblAvailable)
             const cell = document.createElement("td");
             if (tblAvailable.available == true)
             {
@@ -468,8 +469,24 @@ function generateText(text, x,y){
 function generatePath()
 {
     let local = null
-    local = squareGrid[`${squareGrid.findIndex( square => square.item == "battery")}`];
-    console.log(local)
+    local = squareGrid.findIndex( square => square.item == "battery"); console.log(local)
+
+    if( squareGrid[local - 5].item == "wire")
+    {
+        console.log("cima")
+    }
+    if( squareGrid[local - 1].item == "wire")
+    {
+        console.log("esquerda")
+    }
+    if( squareGrid[local + 1].item == "wire")
+    {
+        console.log("direita")
+    }
+    if( squareGrid[local + 5].item == "wire")
+    {
+        console.log("baixo")
+    }
 }
 
 generateTable()
