@@ -261,17 +261,6 @@ canvas.addEventListener('mousemove', (e) =>
     boxes.forEach(box => {
         box.move(e)
     });
-
-    /*
-    console.clear()
-    squareGrid.forEach(square => 
-    {
-        square.checkHover(e)
-    })
-    boxes.forEach(box => {
-        box.move(e)
-    });
-    */
 })
 
 canvas.addEventListener('mousedown', (e) => 
@@ -479,7 +468,7 @@ function generateText(text, x,y){
 function generatePath()
 {
     let local = null
-    local = squareGrid[`${squareGrid.findIndex( square => square.item == "item1")}`];
+    local = squareGrid[`${squareGrid.findIndex( square => square.item == "battery")}`];
     console.log(local)
 }
 
