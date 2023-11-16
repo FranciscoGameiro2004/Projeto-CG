@@ -209,7 +209,7 @@ let compImg = [battery, bulbOff, resistor, switchOn, null]
 let designation = ['Battery', 'Bulb','Resistor','Switch','Wire']
 for (let i = 0; i < 5; i++)
 {
-    boxes.push(new Box(18 + i * 100, 400, 50, 50, colors[i], compImg[i], designation))
+    boxes.push(new Box(18 + i * 100, 400, 50, 50, colors[i], compImg[i], designation[i]))
 }
 
 let squareGrid = new Array();
@@ -474,21 +474,21 @@ function generateText(text, x,y){
 function generatePath()
 {
     let local = null
-    local = squareGrid.findIndex( square => square.item == "battery"); console.log(local)
+    local = squareGrid.findIndex( square => square.item == "Battery"); console.log(local)
 
-    if( squareGrid[local - 5].item == "wire")
+    if( squareGrid[local - 5].item == "Wire")
     {
         console.log("cima")
     }
-    if( squareGrid[local - 1].item == "wire")
+    if( squareGrid[local - 1].item == "Wire")
     {
         console.log("esquerda")
     }
-    if( squareGrid[local + 1].item == "wire")
+    if( squareGrid[local + 1].item == "Wire")
     {
         console.log("direita")
     }
-    if( squareGrid[local + 5].item == "wire")
+    if( squareGrid[local + 5].item == "Wire")
     {
         console.log("baixo")
     }
