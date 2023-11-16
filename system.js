@@ -204,12 +204,12 @@ let buttons = new Array()
 menuBtn = new Button(W/2-65,H/4*3, 130,50, 'Começar', 1)
 
 let boxes = new Array()
-let colors = [null, null, null, 'red']
-let compImg = [bulbOff, resistor, switchOn, null]
-let designation = ['Comp1','Comp2','Comp3','Wire1']
-for (let i = 0; i < 4; i++)
+let colors = [null, null, null, null, 'red']
+let compImg = [battery, bulbOff, resistor, switchOn, null]
+let designation = ['Battery', 'Bulb','Resistor','Switch','Wire']
+for (let i = 0; i < 5; i++)
 {
-    boxes.push(new Box(75 + i * 100, 400, 50, 50, colors[i], compImg[i], i))
+    boxes.push(new Box(18 + i * 100, 400, 50, 50, colors[i], compImg[i], designation))
 }
 
 let squareGrid = new Array();
