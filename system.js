@@ -89,12 +89,15 @@ class gridBlock {
 }
 
 class Box{
-    constructor(posX,posY, Width,Height, color=null, img=null,item) {
+    constructor(posX,posY, Width,Height, color=null, img=null,item, correctX=undefined, correctY=undefined) {
         this.x = posX
         this.y = posY
 
         this.xLock = null
         this.yLock = null
+
+        this.correctX = correctX
+        this.correctY = correctY
 
         this.color = color
         this.img = img
@@ -160,6 +163,13 @@ class Box{
         }
 
     }
+
+    get correctPlace() {
+        if (this.correctX && this.correctY) {
+            return this.x == this.correctX && this.correctY == this.y
+        }
+        return false
+    }
 }
 
 class Button{
@@ -209,7 +219,7 @@ let compImg = [battery, bulbOff, resistor, switchOn, null]
 let designation = ['Battery', 'Bulb','Resistor','Switch','Wire']
 for (let i = 0; i < 5; i++)
 {
-    boxes.push(new Box(18 + i * 100, 400, 50, 50, colors[i], compImg[i], designation[i]))
+    boxes.push(new Box(18 + i * 100, 400, 50, 50, colors[i], compImg[i], designation[i], 125, 175))
 }
 
 let squareGrid = new Array();
