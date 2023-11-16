@@ -89,7 +89,7 @@ class gridBlock {
 }
 
 class Box{
-    constructor(posX,posY, Width,Height, color, img=null,item) {
+    constructor(posX,posY, Width,Height, color=null, img=null,item) {
         this.x = posX
         this.y = posY
 
@@ -112,7 +112,11 @@ class Box{
     }
 
     draw(){
-        ctx.fillStyle = this.color
+        if (this.color){
+            ctx.fillStyle = this.color
+        } else {
+            ctx.fillStyle = 'rgba(0,0,0,0)'
+        }
         ctx.fillRect(this.x,this.y, this.w,this.h)
         if (this.img){
             ctx.drawImage(this.img, this.x,this.y, this.w,this.h);
