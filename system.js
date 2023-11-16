@@ -118,7 +118,7 @@ class Box{
             ctx.fillStyle = 'rgba(0,0,0,0)'
         }
         ctx.fillRect(this.x,this.y, this.w,this.h)
-        if (this.img){
+        if (this.img != null){
             ctx.drawImage(this.img, this.x,this.y, this.w,this.h);
         }
     }
@@ -204,10 +204,12 @@ let buttons = new Array()
 menuBtn = new Button(W/2-65,H/4*3, 130,50, 'Começar', 1)
 
 let boxes = new Array()
-let colors = [null, null, null]
-for (let i = 0; i < 3; i++)
+let colors = [null, null, null, 'red']
+let compImg = [bulbOff, resistor, switchOn, null]
+let designation = ['Comp1','Comp2','Comp3','Wire1']
+for (let i = 0; i < 4; i++)
 {
-    boxes.push(new Box(125 + i * 100, 400, 50, 50, colors[i], bulbOff))
+    boxes.push(new Box(75 + i * 100, 400, 50, 50, colors[i], compImg[i], i))
 }
 
 let squareGrid = new Array();
