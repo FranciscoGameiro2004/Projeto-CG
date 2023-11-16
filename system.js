@@ -441,7 +441,7 @@ function generateTable()
 
         for (let j = 0; j < repeat; j++) 
         {
-            let tblAvailable = squareGrid[`${squareGrid.findIndex( square => square.x == (padding + pixelSizeX * j) && square.y == (padding + pixelSizeY * i))}`]
+            let tblAvailable = squareGrid[`${squareGrid.findIndex( square => square.x == (padding + pixelSizeX * j) && square.y == (padding + pixelSizeY * i))}`];//console.log(tblAvailable)
             const cell = document.createElement("td");
             if (tblAvailable.available == true)
             {
@@ -474,8 +474,24 @@ function generateText(text, x,y){
 function generatePath()
 {
     let local = null
-    local = squareGrid[`${squareGrid.findIndex( square => square.item == "battery")}`];
-    console.log(local)
+    local = squareGrid.findIndex( square => square.item == "battery"); console.log(local)
+
+    if( squareGrid[local - 5].item == "wire")
+    {
+        console.log("cima")
+    }
+    if( squareGrid[local - 1].item == "wire")
+    {
+        console.log("esquerda")
+    }
+    if( squareGrid[local + 1].item == "wire")
+    {
+        console.log("direita")
+    }
+    if( squareGrid[local + 5].item == "wire")
+    {
+        console.log("baixo")
+    }
 }
 
 generateTable()
