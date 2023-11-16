@@ -50,6 +50,7 @@ class gridBlock {
         this.height = Height;
         this.mouseOver = false;
         this.available = true;
+        this.item=null;
     }
 
     draw() 
@@ -88,7 +89,7 @@ class gridBlock {
 }
 
 class Box{
-    constructor(posX,posY, Width,Height, color, img=null) {
+    constructor(posX,posY, Width,Height, color, img=null,item) {
         this.x = posX
         this.y = posY
 
@@ -97,6 +98,7 @@ class Box{
 
         this.color = color
         this.img = img
+        this.item = item
 
         this.prevX = posX
         this.prevY = posY
@@ -106,6 +108,7 @@ class Box{
 
         this.grab = false
         this.onGrid = false
+
     }
 
     draw(){
@@ -198,9 +201,10 @@ menuBtn = new Button(W/2-65,H/4*3, 130,50, 'Começar', 1)
 
 let boxes = new Array()
 let colors = ['red', 'green', 'blue']
+let items = ['battery', 'wire','light']
 for (let i = 0; i < 3; i++)
 {
-    boxes.push(new Box(125 + i * 100, 400, 50, 50, colors[i], bulbOff))
+    boxes.push(new Box(125 + i * 100, 400, 50, 50, colors[i], bulbOff,items[i]))
 }
 
 let squareGrid = new Array();
@@ -210,11 +214,11 @@ for (let i = 0; i < gridSize; i++)
         squareGrid.push(new gridBlock(padding + pixelSizeX * j, padding + pixelSizeY * i, pixelSizeX, pixelSizeY));
     }
 }
-console.log(squareGrid[0]);
-console.log(squareGrid[squareGrid.length -1])
+//console.log(squareGrid[0]);
+//console.log(squareGrid[squareGrid.length -1])
 
-xInit = squareGrid[0].x; xEnd = squareGrid[squareGrid.length -1].x + pixelSizeX; console.log(`x vai de ${xInit} até ${xEnd}`);
-yInit = squareGrid[0].y; yEnd = squareGrid[squareGrid.length -1].y + pixelSizeY; console.log(`y vai de ${yInit} até ${yEnd}`);
+xInit = squareGrid[0].x; xEnd = squareGrid[squareGrid.length -1].x + pixelSizeX; //console.log(`x vai de ${xInit} até ${xEnd}`);
+yInit = squareGrid[0].y; yEnd = squareGrid[squareGrid.length -1].y + pixelSizeY; //console.log(`y vai de ${yInit} até ${yEnd}`);
 
 canvas.addEventListener('mousemove', (e) => 
 {
@@ -296,6 +300,7 @@ canvas.addEventListener('mousedown', (e) =>
                         squareCheck = squareGrid[`${squareGrid.findIndex( square => square.x == check[0] && square.y == check[1])}`];
                     }
                     squareGrid[`${squareGrid.findIndex( square => square.x == check[0] && square.y == check[1])}`].available = true
+                    squareCheck.item=null
                 }
             })
         }
@@ -326,6 +331,7 @@ canvas.addEventListener('mouseup', (e) =>
                         box.lockStatus()
                         //console.log(`${squareGrid.findIndex( square => square.x == check[0] && square.y == check[1])}`)
                         squareCheck.available = false
+                        squareCheck.item = box.item
                     }
                     else if(squareCheck.available == false)
                     {
@@ -470,5 +476,12 @@ function generateText(text, x,y){
     ctx.fillText(text, x, y)
 }
 
+function generatePath()
+{
+    let local = null
+    local = squareGrid[`${squareGrid.findIndex( square => square.item == "item1")}`];
+    console.log(local)
+}
+
 generateTable()
-//console.clear()
+console.clear()
