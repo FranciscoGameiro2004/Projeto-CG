@@ -473,12 +473,14 @@ function generateText(text, x,y){
 
 function generatePath()
 {
+    let path = []
+    let pathData = []
     let local = null
     local = squareGrid.findIndex( square => square.item == "Battery"); console.log(local)
 
     if( squareGrid[local - 5].item == "Wire")
-    {
-        console.log("cima")
+    {   
+        pathData = squareData(local-1)
     }
     if( squareGrid[local - 1].item == "Wire")
     {
@@ -492,7 +494,14 @@ function generatePath()
     {
         console.log("baixo")
     }
+    path.push(pathData),console.log(path)
 }
+function squareData(index)
+{
+    console.log(`X: ${squareGrid[index].x} | Y: ${squareGrid[index].y}`)
+    return [squareGrid[index].x, squareGrid[index].y]
+}
+
 
 generateTable()
 console.clear()
