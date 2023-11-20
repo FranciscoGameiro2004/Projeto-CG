@@ -42,6 +42,10 @@ var originalPosX = 0
 var originalPosY = 0
 var boxGrabbed = null
 var Start = true
+var oldPathData = null
+var actualPathData = null
+var oldLocal = null
+var local = null
 
 class gridBlock {
     constructor(posX, posY, Width, Height, img=null) {
@@ -246,12 +250,12 @@ let buttons = new Array()
 menuBtn = new Button(W/2-65,H/4*3, 130,50, 'Começar', 1)
 
 let boxes = new Array()
-let colors = [null, null, null, null, 'red']
-let compImg = [battery, bulbOff, resistor, switchOn, null]
-let designation = ['Battery', 'Bulb','Resistor','Switch','Wire']
-for (let i = 0; i < 5; i++)
+let colors = [null, null, null, null, 'red', 'red', 'red']
+let compImg = [battery, bulbOff, resistor, switchOn, null, null, null]
+let designation = ['Battery', 'Bulb','Resistor','Switch','Wire','Wire','Wire']
+for (let i = 0; i < 8; i++)
 {
-    boxes.push(new Box(18 + i * 100, 400, 50, 50, colors[i], compImg[i], designation[i], 125+50*i, 175))
+    boxes.push(new Box(0 + i * 75, 400, 50, 50, colors[i], compImg[i], designation[i], 125+50*i, 175))
 }
 
 let squareGrid = new Array();
@@ -509,6 +513,7 @@ function generateTable()
             }
             cell.style.width = (100) + "px"
             cell.style.height = (50) + "px"
+            cell.innerHTML = squareGrid.findIndex( square => square.x == (padding + pixelSizeX * j) && square.y == (padding + pixelSizeY * i))
             row.appendChild(cell);
         }
 
@@ -526,51 +531,63 @@ function generateText(text, x,y){
     ctx.fillText(text, x, y)
 }
 
-function path(local)
-{
-    if( squareGrid[local - 5] != undefined && squareGrid[local - 5].item == "Wire")
-    {   
-        pathData = squareData(local-5);//console.log(squareData(local-5))
-    }
-    if( squareGrid[local - 1] != undefined && squareGrid[local - 1].item == "Wire")
-    {
-        pathData = squareData(local-1);
-    }
-    if( squareGrid[local + 1] != undefined && squareGrid[local + 1].item == "Wire")
-    {
-        pathData = squareData(local+1);
-    }
-    if( squareGrid[local + 5] != undefined && squareGrid[local + 5].item == "Wire")
-    {
-        pathData = squareData(local+5);
+let previousPoint = null; // Mantém o ponto anterior
+
+function path(local) {
+    console.log("path");
+
+    let squareCheckItem = squareData(local);
+    console.log(squareCheckItem);
+
+    oldPathData = actualPathData;
+    oldLocal = local;
+
+    if (squareCheckItem[2] == 'Battery') {
+        if (squareGrid[local - 5] != undefined && squareGrid[local - 5].item == "Wire") {
+            actualPathData = squareData(local - 5);
+            // Se encontrar um novo caminho, redefine o ponto anterior como nulo
+            previousPoint = null;
+        }
+    } else {
+        if (squareGrid[local - 5] != undefined && squareGrid[local - 5].item == "Wire") {
+            actualPathData = squareData(local - 5);
+            // Se encontrar um novo caminho, redefine o ponto anterior como nulo
+            previousPoint = null;
+        }
+        
     }
 
-    let pointX = pathData[0] + pixelSizeX/2
-    let pointY = pathData[1] + pixelSizeY/2;
+    let pointX = actualPathData[0] + pixelSizeX / 2;
+    let pointY = actualPathData[1] + pixelSizeY / 2;
     points.push(new Point(pointX, pointY));
+    console.table(points);
 }
 
-function generatePath()
-{
-    let pathData = []
-    let local = null
-    if (Start === true)
-    {
-        local = squareGrid.findIndex( square => square.item == "Battery");console.log(local)
-        Start = false
-        path(local)
+function generatePath() {
+    if (Start == true) {
+        local = squareGrid.findIndex(square => square.item == "Battery");
+        Start = false;
+    } else {
+        local = squareGrid.findIndex(square => square.x == actualPathData[0] && square.y == actualPathData[1]);
+        console.log(local);
     }
-    else
-    {
-        local = [pathData[0], pathData[1]]
-        path(local)
+    
+    // Se o ponto anterior existe, e se a próxima posição é diferente do ponto anterior, então prossegue com a criação do caminho
+    if (previousPoint && (previousPoint[0] !== actualPathData[0] || previousPoint[1] !== actualPathData[1])) {
+        path(local);
+    } else {
+        path(local); // Se não há ponto anterior ou a próxima posição é igual ao ponto anterior, ainda assim cria o caminho
     }
-
+    
+    // Atualiza o ponto anterior para a posição atual
+    previousPoint = [actualPathData[0], actualPathData[1]];
 }
+
+
 function squareData(index)
 {
     //console.log(`X: ${squareGrid[index].x} | Y: ${squareGrid[index].y}`)
-    return [squareGrid[index].x, squareGrid[index].y]
+    return [squareGrid[index].x, squareGrid[index].y,squareGrid[index].item]
 }
 
 
