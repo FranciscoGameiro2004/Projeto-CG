@@ -542,5 +542,6 @@ console.clear()
 function checkRequirements(boxArray){
     if (boxArray.every(box=>box.correctPlace)){
         phase += 1
+        boxArray.forEach(box=>box.doesMove = false)
     }
 }
