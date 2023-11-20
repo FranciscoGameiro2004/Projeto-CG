@@ -41,6 +41,7 @@ var squareCheck = null
 var originalPosX = 0
 var originalPosY = 0
 var boxGrabbed = null
+var Start = true
 
 class gridBlock {
     constructor(posX, posY, Width, Height) {
@@ -209,6 +210,23 @@ class Button{
         }
     }
 }
+
+class Point {
+    constructor(x,y){
+        this.X = x;
+        this.Y = y;
+        this.Radius = 10;
+        this.Start = 0;
+        this.End = 2 * Math.PI
+    }
+    draw(){
+        ctx.beginPath();
+        ctx.arc(this.X, this.Y, this.Radius, this.Start, this.End);
+        ctx.fillStyle = "black"
+        ctx.fill();
+    }
+}
+let points = new Array
 
 let buttons = new Array()
 menuBtn = new Button(W/2-65,H/4*3, 130,50, 'Começar', 1)
@@ -418,6 +436,10 @@ setInterval(() =>
         boxes.forEach(box => {
             box.draw()
         });
+        points.forEach(point => {
+            point.draw()
+        });
+
     } else {
         drawMenu()
 
@@ -481,34 +503,50 @@ function generateText(text, x,y){
     ctx.fillText(text, x, y)
 }
 
+function path(local)
+{
+    if( squareGrid[local - 5] != undefined && squareGrid[local - 5].item == "Wire")
+    {   
+        pathData = squareData(local-5);//console.log(squareData(local-5))
+    }
+    if( squareGrid[local - 1] != undefined && squareGrid[local - 1].item == "Wire")
+    {
+        pathData = squareData(local-1);
+    }
+    if( squareGrid[local + 1] != undefined && squareGrid[local + 1].item == "Wire")
+    {
+        pathData = squareData(local+1);
+    }
+    if( squareGrid[local + 5] != undefined && squareGrid[local + 5].item == "Wire")
+    {
+        pathData = squareData(local+5);
+    }
+
+    let pointX = pathData[0] + pixelSizeX/2
+    let pointY = pathData[1] + pixelSizeY/2;
+    points.push(new Point(pointX, pointY));
+}
+
 function generatePath()
 {
-    let path = []
     let pathData = []
     let local = null
-    local = squareGrid.findIndex( square => square.item == "Battery"); console.log(local)
+    if (Start === true)
+    {
+        local = squareGrid.findIndex( square => square.item == "Battery");console.log(local)
+        Start = false
+        path(local)
+    }
+    else
+    {
+        local = [pathData[0], pathData[1]]
+        path(local)
+    }
 
-    if( squareGrid[local - 5].item == "Wire")
-    {   
-        pathData = squareData(local-1)
-    }
-    if( squareGrid[local - 1].item == "Wire")
-    {
-        console.log("esquerda")
-    }
-    if( squareGrid[local + 1].item == "Wire")
-    {
-        console.log("direita")
-    }
-    if( squareGrid[local + 5].item == "Wire")
-    {
-        console.log("baixo")
-    }
-    path.push(pathData),console.log(path)
 }
 function squareData(index)
 {
-    console.log(`X: ${squareGrid[index].x} | Y: ${squareGrid[index].y}`)
+    //console.log(`X: ${squareGrid[index].x} | Y: ${squareGrid[index].y}`)
     return [squareGrid[index].x, squareGrid[index].y]
 }
 
