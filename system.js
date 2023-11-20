@@ -219,7 +219,7 @@ let compImg = [battery, bulbOff, resistor, switchOn, null]
 let designation = ['Battery', 'Bulb','Resistor','Switch','Wire']
 for (let i = 0; i < 5; i++)
 {
-    boxes.push(new Box(18 + i * 100, 400, 50, 50, colors[i], compImg[i], designation[i], 125, 175))
+    boxes.push(new Box(18 + i * 100, 400, 50, 50, colors[i], compImg[i], designation[i], 125+50*i, 175))
 }
 
 let squareGrid = new Array();
@@ -406,8 +406,10 @@ setInterval(() =>
     if (phase != 0) {
         if (phase == 1){
             tutorialText = 'Coloque os componentes nas suas áreas'
+            checkRequirements(boxes)
         } else if (phase == 2){
             tutorialText = 'Conecte os componentes'
+            //TODO: colocar um checkRequirements para um array de fios
         } else {
             tutorialText = ''
         }
@@ -515,3 +517,9 @@ function squareData(index)
 
 generateTable()
 console.clear()
+
+function checkRequirements(boxArray){
+    if (boxArray.every(box=>box.correctPlace)){
+        phase += 1
+    }
+}
