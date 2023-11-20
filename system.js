@@ -43,7 +43,7 @@ var originalPosY = 0
 var boxGrabbed = null
 
 class gridBlock {
-    constructor(posX, posY, Width, Height) {
+    constructor(posX, posY, Width, Height, img=null) {
         this.x = posX;
         this.y = posY;
         this.width = Width;
@@ -51,6 +51,7 @@ class gridBlock {
         this.mouseOver = false;
         this.available = true;
         this.item=null;
+        this.img=img;
     }
 
     draw() 
@@ -61,7 +62,14 @@ class gridBlock {
         ctx.lineWidth = 1;
         if (this.mouseOver) {
             ctx.fillRect(this.x, this.y, this.width, this.height);
+            ctx.globalAlpha = 0.9
+        } else {
+            ctx.globalAlpha = 0.35;
         }
+        if (this.img != null && this.img != undefined){
+            ctx.drawImage(this.img, this.x,this.y, this.width,this.height);
+        }
+        ctx.globalAlpha = 1;
         ctx.strokeRect(this.x, this.y, this.width, this.height);
     }
 
@@ -112,6 +120,7 @@ class Box{
         this.grab = false
         this.onGrid = false
 
+        this.doesMove = true
     }
 
     draw(){
@@ -127,26 +136,31 @@ class Box{
     }
 
     move(e){
-        if (this.grab){
-            this.x -= (this.prevX - e.offsetX)
-            this.y -= (this.prevY - e.offsetY)
+        if (this.doesMove){
+            if (this.grab){
+                this.x -= (this.prevX - e.offsetX)
+                this.y -= (this.prevY - e.offsetY)
+            }
+    
+            this.prevX = e.offsetX
+            this.prevY = e.offsetY
         }
-
-        this.prevX = e.offsetX
-        this.prevY = e.offsetY
     }
 
     grabStatus(e){
-        let X = e.offsetX; let Y = e.offsetY
-        if (
-            X > this.x && 
-            X < this.x + this.w && 
-            Y > this.y && 
-            Y < this.y + this.h
-            )
-        {
-            this.grab = true
+        if (this.doesMove){
+            let X = e.offsetX; let Y = e.offsetY
+            if (
+                X > this.x && 
+                X < this.x + this.w && 
+                Y > this.y && 
+                Y < this.y + this.h
+                )
+            {
+                this.grab = true
+            }
         }
+        
     }
 
     lockStatus()
@@ -226,7 +240,14 @@ let squareGrid = new Array();
 for (let i = 0; i < gridSize; i++) 
 {
     for (let j = 0; j < gridSize; j++) {
-        squareGrid.push(new gridBlock(padding + pixelSizeX * j, padding + pixelSizeY * i, pixelSizeX, pixelSizeY));
+        let image = ''
+        try {
+            let imgIndex = boxes.find(box => box.correctX == padding + pixelSizeX * j && box.correctY == padding + pixelSizeY * i)
+            image = imgIndex.img
+        } catch (error) {
+            image = null
+        }
+        squareGrid.push(new gridBlock(padding + pixelSizeX * j, padding + pixelSizeY * i, pixelSizeX, pixelSizeY, img=image));
     }
 }
 //console.log(squareGrid[0]);
