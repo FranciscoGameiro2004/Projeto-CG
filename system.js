@@ -59,7 +59,7 @@ var oldPathData = null
 var actualPathData = null
 var oldLocal = null
 var local = null
-
+var batteryEnd = false
 
 class gridBlock {
     constructor(posX, posY, Width, Height, img=null) {
@@ -548,12 +548,12 @@ function generateText(text, x,y){
 }
 
 let previousPoint = null; // Mantém o ponto anterior
-var posNum = [-5,-1,5,1]
-function path(local) {
+
+function path(local) 
+{
     console.log("path");
 
-    let squareCheckItem = squareData(local);
-    console.log(squareCheckItem);
+    let squareCheckItem = squareData(local); console.log(squareCheckItem);
 
     oldPathData = actualPathData;
     oldLocal = local;
@@ -566,18 +566,18 @@ function path(local) {
     {
         checkDir(local)
     }
-    console.log(actualPathData)
-    let pointX = actualPathData[0] + pixelSizeX / 2;
-    let pointY = actualPathData[1] + pixelSizeY / 2;
+
+    let pointX = actualPathData[0] + pixelSizeX / 2; let pointY = actualPathData[1] + pixelSizeY / 2;
     points.push(new Point(pointX, pointY));
-    console.table(points);
 }
 
+var posNum = [-5,-1,5,1]
+let aceptablesItems = ['Bulb','Resistor','Switch','Wire']
 function checkDir(local)
 {
     for(let i = 0; i < posNum.length; i++)
     {
-        if (squareGrid[local + posNum[i]] != undefined && squareGrid[local + posNum[i]].item == "Wire") 
+        if (squareGrid[local + posNum[i]] != undefined && aceptablesItems.includes(squareGrid[local + posNum[i]].item)) 
         {
             actualPathData = squareData(local + posNum[i]);
             // Se encontrar um novo caminho, redefine o ponto anterior como nulo
@@ -586,24 +586,36 @@ function checkDir(local)
     }
 }
 
-function generatePath() {
-    if (Start == true) {
-        local = squareGrid.findIndex(square => square.item == "Battery");
-        Start = false;
-    } else {
-        local = squareGrid.findIndex(square => square.x == actualPathData[0] && square.y == actualPathData[1]);
-        console.log(local);
-    }
-    
-    // Se o ponto anterior existe, e se a próxima posição é diferente do ponto anterior, então prossegue com a criação do caminho
-    if (previousPoint && (previousPoint[0] !== actualPathData[0] || previousPoint[1] !== actualPathData[1])) {
-        path(local);
-    } else {
-        path(local); // Se não há ponto anterior ou a próxima posição é igual ao ponto anterior, ainda assim cria o caminho
-    }
-    
-    // Atualiza o ponto anterior para a posição atual
-    previousPoint = [actualPathData[0], actualPathData[1]];
+function generatePath() 
+{
+    /*
+    while(batteryEnd == false)
+    {
+    */
+        if (Start == true) 
+        {
+            local = squareGrid.findIndex(square => square.item == "Battery"); console.log(local)
+            Start = false;
+        } 
+        else 
+        {
+            local = squareGrid.findIndex(square => square.x == actualPathData[0] && square.y == actualPathData[1]);//console.log(local);
+        }
+        
+        // Se o ponto anterior existe, e se a próxima posição é diferente do ponto anterior, então prossegue com a criação do caminho
+        if (previousPoint && (previousPoint[0] !== actualPathData[0] || previousPoint[1] !== actualPathData[1])) 
+        {
+            path(local);
+        } 
+        else 
+        {
+            path(local); // Se não há ponto anterior ou a próxima posição é igual ao ponto anterior, ainda assim cria o caminho
+        }
+        
+        // Atualiza o ponto anterior para a posição atual
+        previousPoint = [actualPathData[0], actualPathData[1]];
+    //}
+
 }
 
 
