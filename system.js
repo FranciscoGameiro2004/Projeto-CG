@@ -439,7 +439,7 @@ canvas.addEventListener("click", (e) =>
         })
         if (squareCheck != null)
         {
-            console.table(squareCheck)
+            console.log(squareCheck)
         }
     }
 })
@@ -553,7 +553,7 @@ function path(local)
 {
     console.log("path");
 
-    let squareCheckItem = squareData(local); console.log(squareCheckItem);
+    let squareCheckItem = squareData(local); //console.log(squareCheckItem);
 
     oldPathData = actualPathData;
     oldLocal = local;
@@ -568,7 +568,7 @@ function path(local)
     }
 
     let pointX = actualPathData[0] + pixelSizeX / 2; let pointY = actualPathData[1] + pixelSizeY / 2;
-    points.push(new Point(pointX, pointY));
+    points.push(new Point(pointX, pointY)); console.log(points);
 }
 
 var posNum = [-5,-1,5,1]
@@ -579,7 +579,7 @@ function checkDir(local)
     {
         if (squareGrid[local + posNum[i]] != undefined && aceptablesItems.includes(squareGrid[local + posNum[i]].item)) 
         {
-            actualPathData = squareData(local + posNum[i]);
+            actualPathData = squareData(local + posNum[i]);console.log(actualPathData)
             // Se encontrar um novo caminho, redefine o ponto anterior como nulo
             previousPoint = null;
         }
@@ -603,6 +603,7 @@ function generatePath()
         }
         
         // Se o ponto anterior existe, e se a próxima posição é diferente do ponto anterior, então prossegue com a criação do caminho
+        console.log(actualPathData)
         if (previousPoint && (previousPoint[0] !== actualPathData[0] || previousPoint[1] !== actualPathData[1])) 
         {
             path(local);
@@ -613,7 +614,7 @@ function generatePath()
         }
         
         // Atualiza o ponto anterior para a posição atual
-        previousPoint = [actualPathData[0], actualPathData[1]];
+        previousPoint = [actualPathData[0], actualPathData[1]]; console.log(previousPoint);
     //}
 
 }
