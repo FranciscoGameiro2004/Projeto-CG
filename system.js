@@ -47,6 +47,7 @@ var actualPathData = null
 var oldLocal = null
 var local = null
 
+
 class gridBlock {
     constructor(posX, posY, Width, Height, img=null) {
         this.x = posX;
@@ -526,7 +527,7 @@ function generateText(text, x,y){
 }
 
 let previousPoint = null; // Mantém o ponto anterior
-
+var posNum = [-5,-1,5,1]
 function path(local) {
     console.log("path");
 
@@ -536,21 +537,30 @@ function path(local) {
     oldPathData = actualPathData;
     oldLocal = local;
 
-    if (squareCheckItem[2] == 'Battery') {
-        if (squareGrid[local - 5] != undefined && squareGrid[local - 5].item == "Wire") {
-            actualPathData = squareData(local - 5);
-            // Se encontrar um novo caminho, redefine o ponto anterior como nulo
-            previousPoint = null;
+    if (squareCheckItem[2] == 'Battery') 
+    {
+        for(let i = 0; i < posNum.length; i++)
+        {
+            if (squareGrid[local + posNum[i]] != undefined && squareGrid[local + posNum[i]].item == "Wire") 
+            {
+                actualPathData = squareData(local + posNum[i]);
+                // Se encontrar um novo caminho, redefine o ponto anterior como nulo
+                previousPoint = null;
+            }
         }
-    } else {
-        if (squareGrid[local - 5] != undefined && squareGrid[local - 5].item == "Wire") {
-            actualPathData = squareData(local - 5);
-            // Se encontrar um novo caminho, redefine o ponto anterior como nulo
-            previousPoint = null;
+    } 
+    else {
+        for(let i = 0; i < posNum.length; i++)
+        {
+            if (squareGrid[local + posNum[i]] != undefined && squareGrid[local + posNum[i]].item == "Wire") 
+            {
+                actualPathData = squareData(local + posNum[i]);
+                // Se encontrar um novo caminho, redefine o ponto anterior como nulo
+                previousPoint = null;
+            }
         }
-        
     }
-
+    console.log(actualPathData)
     let pointX = actualPathData[0] + pixelSizeX / 2;
     let pointY = actualPathData[1] + pixelSizeY / 2;
     points.push(new Point(pointX, pointY));
