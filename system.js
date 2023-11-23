@@ -446,31 +446,25 @@ canvas.addEventListener('click', e =>{
 setInterval(() => 
 {
     ctx.clearRect(0, 0, W, H);
-    if (phase != 0) {
-        if (phase == 1){
-            tutorialText = 'Coloque os componentes nas suas áreas'
-            checkRequirements(boxes)
-        } else if (phase == 2){
-            tutorialText = 'Conecte os componentes'
-            //TODO: colocar um checkRequirements para um array de fios
-        } else {
-            tutorialText = ''
-        }
-        generateText(tutorialText, W/2, 75)
-        squareGrid.forEach(square => {
-            square.draw();
-        });
-        boxes.forEach(box => {
-            box.draw()
-        });
-        points.forEach(point => {
-            point.draw()
-        });
-
+    if (phase == 1){
+        tutorialText = 'Coloque os componentes nas suas áreas'
+        checkRequirements(boxes)
+    } else if (phase == 2){
+        tutorialText = 'Conecte os componentes'
+        //TODO: colocar um checkRequirements para um array de fios
     } else {
-        drawMenu()
-
+        tutorialText = ''
     }
+    generateText(tutorialText, W/2, 75)
+    squareGrid.forEach(square => {
+        square.draw();
+    });
+    boxes.forEach(box => {
+        box.draw()
+    });
+    points.forEach(point => {
+        point.draw()
+    });
     if (phase < 3) {
         componentProperties.style.visibility = 'collapse'
     } else {
@@ -599,4 +593,10 @@ function checkRequirements(boxArray){
         phase += 1
         boxArray.forEach(box=>box.doesMove = false)
     }
+}
+
+function btnClick(){
+    phase += 1
+    canvas.style.visibility = 'visible'
+    document.querySelector('#menu').style.visibility = 'collapse'
 }
