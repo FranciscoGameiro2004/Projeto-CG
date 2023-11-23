@@ -38,6 +38,18 @@ bulbOn.src = 'assets/lampada_acesa.png'
 resistor = new Image()
 resistor.src = 'assets/resistencia.png'
 
+wireSL = new Image()
+wireSL.src = 'assets/fioSE.png'
+
+wireSR = new Image()
+wireSR.src = 'assets/fioSD.png'
+
+wireIL = new Image()
+wireIL.src = 'assets/fioIE.png'
+
+wireIR = new Image()
+wireIR.src = 'assets/fioID.png'
+
 var squareCheck = null
 var originalPosX = 0
 var originalPosY = 0
@@ -621,8 +633,8 @@ function generateBoxComponents(){
 }
 
 function generateBoxWires(){
-    boxes.push(new Box(0 + 0 * 75, 400, 50, 50, 'red', null, 'Wire', 175, 175))
-    boxes.push(new Box(0 + 1 * 75, 400, 50, 50, 'blue', null, 'Wire', 275, 175))
-    boxes.push(new Box(0 + 2 * 75, 400, 50, 50, 'yellow', null, 'Wire', 175, 275))
-    boxes.push(new Box(0 + 3 * 75, 400, 50, 50, 'green', null, 'Wire', 275, 275))
+    boxes.push(new Box(0 + 0 * 75, 400, 50, 50, null, wireSL, 'Wire', 175, 175))
+    boxes.push(new Box(0 + 1 * 75, 400, 50, 50, null, wireSR, 'Wire', 275, 175))
+    boxes.push(new Box(0 + 2 * 75, 400, 50, 50, null, wireIL, 'Wire', 175, 275))
+    boxes.push(new Box(0 + 3 * 75, 400, 50, 50, null, wireIR, 'Wire', 275, 275))
 }
