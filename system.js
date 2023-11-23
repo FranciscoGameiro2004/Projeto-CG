@@ -548,32 +548,30 @@ function path(local) {
 
     if (squareCheckItem[2] == 'Battery') 
     {
-        for(let i = 0; i < posNum.length; i++)
-        {
-            if (squareGrid[local + posNum[i]] != undefined && squareGrid[local + posNum[i]].item == "Wire") 
-            {
-                actualPathData = squareData(local + posNum[i]);
-                // Se encontrar um novo caminho, redefine o ponto anterior como nulo
-                previousPoint = null;
-            }
-        }
+        checkDir(local)
     } 
-    else {
-        for(let i = 0; i < posNum.length; i++)
-        {
-            if (squareGrid[local + posNum[i]] != undefined && squareGrid[local + posNum[i]].item == "Wire") 
-            {
-                actualPathData = squareData(local + posNum[i]);
-                // Se encontrar um novo caminho, redefine o ponto anterior como nulo
-                previousPoint = null;
-            }
-        }
+    else 
+    {
+        checkDir(local)
     }
     console.log(actualPathData)
     let pointX = actualPathData[0] + pixelSizeX / 2;
     let pointY = actualPathData[1] + pixelSizeY / 2;
     points.push(new Point(pointX, pointY));
     console.table(points);
+}
+
+function checkDir(local)
+{
+    for(let i = 0; i < posNum.length; i++)
+    {
+        if (squareGrid[local + posNum[i]] != undefined && squareGrid[local + posNum[i]].item == "Wire") 
+        {
+            actualPathData = squareData(local + posNum[i]);
+            // Se encontrar um novo caminho, redefine o ponto anterior como nulo
+            previousPoint = null;
+        }
+    }
 }
 
 function generatePath() {
