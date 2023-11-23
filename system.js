@@ -468,7 +468,7 @@ setInterval(() =>
     } else if (phase == 2){
         tutorialText = 'Conecte os componentes'
         if (addWires){
-            alert('ok')
+            //alert('ok')
             generateBoxWires()
             addWires = false
         }
