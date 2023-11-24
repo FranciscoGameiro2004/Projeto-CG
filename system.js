@@ -573,7 +573,8 @@ function path(local)
 
 var posNum = [-5,-1,5,1]
 let aceptablesItems = ['Bulb','Resistor','Switch','Wire']
-function checkDir(local) {
+function checkDir(local) 
+{
     for (let i = 0; i < posNum.length; i++) {
         if (squareGrid[local + posNum[i]] != undefined && aceptablesItems.includes(squareGrid[local + posNum[i]].item)) {
             actualPathData = squareData(local + posNum[i]);
