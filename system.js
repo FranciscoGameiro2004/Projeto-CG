@@ -568,23 +568,33 @@ function path(local)
     }
 
     let pointX = actualPathData[0] + pixelSizeX / 2; let pointY = actualPathData[1] + pixelSizeY / 2;
-    points.push(new Point(pointX, pointY)); console.log(points);
+    points.push(new Point(pointX, pointY)); console.table(points);
 }
 
 var posNum = [-5,-1,5,1]
 let aceptablesItems = ['Bulb','Resistor','Switch','Wire']
-function checkDir(local)
-{
-    for(let i = 0; i < posNum.length; i++)
-    {
-        if (squareGrid[local + posNum[i]] != undefined && aceptablesItems.includes(squareGrid[local + posNum[i]].item)) 
-        {
-            actualPathData = squareData(local + posNum[i]);console.log(actualPathData)
-            // Se encontrar um novo caminho, redefine o ponto anterior como nulo
-            previousPoint = null;
+function checkDir(local) {
+    for (let i = 0; i < posNum.length; i++) {
+        if (squareGrid[local + posNum[i]] != undefined && aceptablesItems.includes(squareGrid[local + posNum[i]].item)) {
+            actualPathData = squareData(local + posNum[i]);
+
+            let pointX = actualPathData[0] + pixelSizeX / 2;
+            let pointY = actualPathData[1] + pixelSizeY / 2;
+
+            // Verificar se as coordenadas estão presentes no array de pontos
+            let foundPoint = points.find(point => point.X === pointX && point.Y === pointY);
+            if (foundPoint) 
+            {
+                continue
+            } 
+            else 
+            {
+                break
+            }
         }
     }
 }
+
 
 function generatePath() 
 {
@@ -592,9 +602,10 @@ function generatePath()
     while(batteryEnd == false)
     {
     */
+        console.clear()
         if (Start == true) 
         {
-            local = squareGrid.findIndex(square => square.item == "Battery"); console.log(local)
+            local = squareGrid.findIndex(square => square.item == "Battery");//console.log(local)
             Start = false;
         } 
         else 
@@ -603,7 +614,9 @@ function generatePath()
         }
         
         // Se o ponto anterior existe, e se a próxima posição é diferente do ponto anterior, então prossegue com a criação do caminho
-        console.log(actualPathData)
+
+        //console.log(actualPathData)
+
         if (previousPoint && (previousPoint[0] !== actualPathData[0] || previousPoint[1] !== actualPathData[1])) 
         {
             path(local);
