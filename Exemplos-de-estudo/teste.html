@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mover Ponto ao Longo de um Quadrado no Canvas</title>
+  <style>
+    canvas {
+      border: 1px solid #ccc;
+      float: left;
+    }
+    table {
+      margin-left: 20px;
+      font-family: Arial, sans-serif;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="myCanvas" width="500" height="500"></canvas>
+  <table id="infoTable">
+    <tr>
+      <th>Posição X</th>
+      <td id="posX"></td>
+    </tr>
+    <tr>
+      <th>Posição Y</th>
+      <td id="posY"></td>
+    </tr>
+    <tr>
+      <th>dx</th>
+      <td id="dx"></td>
+    </tr>
+    <tr>
+      <th>dy</th>
+      <td id="dy"></td>
+    </tr>
+  </table>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const canvas = document.getElementById('myCanvas');
+      const ctx = canvas.getContext('2d');
+
+      const squarePath = [
+        { x: 100, y: 10 },
+        { x: 400, y: 300 },
+        { x: 400, y: 400 },
+        { x: 100, y: 320 },
+        { x: 10, y: 100 } // Volta para o ponto inicial para formar um loop
+      ];
+
+      let index = 0; // Índice do próximo ponto no caminho
+      let posX = squarePath[0].x;
+      let posY = squarePath[0].y;
+      let targetX = squarePath[0].x;
+      let targetY = squarePath[0].y;
+
+      function drawPoint(x, y) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = 'red';
+        ctx.beginPath();
+        ctx.arc(x, y, 5, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Desenhar arco entre os pontos
+        ctx.strokeStyle = 'blue';
+        ctx.lineWidth = 2;
+        for (let i = 0; i < squarePath.length - 1; i++) {
+          ctx.beginPath();
+          ctx.moveTo(squarePath[i].x, squarePath[i].y);
+          ctx.lineTo(squarePath[i + 1].x, squarePath[i + 1].y);
+          ctx.stroke();
+        }
+        // Fechar o loop
+        ctx.beginPath();
+        ctx.moveTo(squarePath[squarePath.length - 1].x, squarePath[squarePath.length - 1].y);
+        ctx.lineTo(squarePath[0].x, squarePath[0].y);
+        ctx.stroke();
+      }
+
+      function movePoint() {
+        const dx = targetX - posX;
+        const dy = targetY - posY;
+
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        const speed = 2; // Velocidade de movimento
+
+        if (distance > speed) {
+          posX += (dx / distance) * speed;
+          posY += (dy / distance) * speed;
+        } else {
+          posX = targetX;
+          posY = targetY;
+          index = (index + 1) % squarePath.length;
+          targetX = squarePath[index].x;
+          targetY = squarePath[index].y;
+        }
+
+        drawPoint(posX, posY);
+
+        // Atualizar a tabela com os dados
+        document.getElementById('posX').textContent = posX.toFixed(2);
+        document.getElementById('posY').textContent = posY.toFixed(2);
+        document.getElementById('dx').textContent = dx.toFixed(2);
+        document.getElementById('dy').textContent = dy.toFixed(2);
+
+        requestAnimationFrame(movePoint);
+      }
+
+      requestAnimationFrame(movePoint);
+    });
+  </script>
+</body>
+</html>
