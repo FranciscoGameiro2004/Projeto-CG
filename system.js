@@ -568,7 +568,7 @@ function path(local)
     }
 
     let pointX = actualPathData[0] + pixelSizeX / 2; let pointY = actualPathData[1] + pixelSizeY / 2;
-    points.push(new Point(pointX, pointY)); console.table(points);
+    points.push(new Point(pointX, pointY)); //console.table(points);
 }
 
 var posNum = [-5,-1,5,1]
