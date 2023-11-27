@@ -10,11 +10,6 @@ let phase = 0
 let tutorialText = ''
 let padding = 125
 
-let pointIL = {x: 0, y:0}
-let pointIR = {x: 0, y:0}
-let pointSL = {x: 0, y:0}
-let pointSR = {x: 0, y:0}
-
 const gridSize = 5;
 const pixelSizeX = 250 / gridSize;
 const pixelSizeY = 250 / gridSize;
@@ -266,6 +261,7 @@ class Point {
 let points = new Array
 
 let buttons = new Array()
+menuBtn = new Button(W/2-65,H/4*3, 130,50, 'Começar', 1)
 
 let boxes = new Array()
 let colors = [null, null, null, null, 'red', 'red', 'red']
@@ -681,36 +677,4 @@ function generateBoxWires(){
     boxes.push(new Box(0 + 1 * 75, 400, 50, 50, null, wireSR, 'Wire', 275, 175))
     boxes.push(new Box(0 + 2 * 75, 400, 50, 50, null, wireIL, 'Wire', 175, 275))
     boxes.push(new Box(0 + 3 * 75, 400, 50, 50, null, wireIR, 'Wire', 275, 275))
-}
-
-function determinePoints(){
-    let biggestX = -999
-    let biggestY = -999
-    let lowestX = 999
-    let lowestY = 999
-    points.forEach(point => {
-        if(point.X > biggestX){
-            biggestX = point.X
-        }
-        if(point.Y > biggestY){
-            biggestY = point.X
-        }
-
-        if(point.X < lowestX){
-            lowestX = point.X
-        }
-        if(point.Y < lowestY){
-            lowestY = point.X
-        }
-    })
-
-    pointIL = {x: lowestX, y:lowestY}
-    pointIR = {x: biggestX, y:lowestY}
-    pointSL = {x: lowestX, y:biggestY}
-    pointSR = {x: biggestX, y:biggestY}
-
-    console.log(pointIL);
-    console.log(pointIR);
-    console.log(pointSL);
-    console.log(pointSR);
 }
