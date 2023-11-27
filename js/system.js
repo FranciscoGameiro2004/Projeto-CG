@@ -1,5 +1,17 @@
 //import { Box, Button, Point } from './components.js';
 
+//NOTA: Variáveis que acrescentei para controlo de componentes para separar depois #ASeparar
+let btnCircuitSwitch = document.querySelector('#switch')
+let rngBulb = document.querySelector('#bulb')
+let rngBattery = document.querySelector('#battery')
+let rngResistance = document.querySelector('#resistance')
+//-------------------------||--------------------------//
+let toggleSwitch = 1
+let bulbRes = 10
+let batteryVolt = 9
+let resistanceRes = 10
+let ampere = batteryVolt/(resistanceRes + bulbRes)
+
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 const W = canvas.width;
@@ -25,11 +37,11 @@ var xInit = 0; var xEnd = 0;
 var yInit = 0; var yEnd = 0;
 
 
-let switchOn = new Image()
-switchOn.src = 'assets/interruptor_aberto.png'
-
 let switchOff = new Image()
-switchOff.src = 'assets/interruptor_fechado.png'
+switchOff.src = 'assets/interruptor_aberto.png'
+
+let switchOn = new Image()
+switchOn.src = 'assets/interruptor_fechado.png'
 
 let battery = new Image()
 battery.src = 'assets/pilha.png'
@@ -490,7 +502,7 @@ setInterval(() =>
     else if (phase == 3)
     {
         tutorialText = ''
-        //generatePath()
+        generatePath()
     }
     generateText(tutorialText, W/2, 75)
     squareGrid.forEach(square => {
@@ -666,6 +678,11 @@ function generatePath()
         determinePoints()
 
         genPathFlag = false
+
+        //NOTA: Alterações de imagem #ASeparar
+        console.log('ON');
+        boxes[1].img = bulbOn
+        boxes[3].img = switchOn
     }
 }
 
@@ -719,14 +736,14 @@ function determinePoints(){
             biggestX = point.X
         }
         if(point.Y > biggestY){
-            biggestY = point.X
+            biggestY = point.Y
         }
 
         if(point.X < lowestX){
             lowestX = point.X
         }
         if(point.Y < lowestY){
-            lowestY = point.X
+            lowestY = point.Y
         }
     })
 
@@ -742,22 +759,68 @@ function determinePoints(){
 }
 
 function animateElectrons(){
-    let velocity = 1
+    let velocity = ampere*toggleSwitch
     points.forEach(point => {
         if (point.Y == pointIL.y && point.Y == pointIR.y && point.X != pointIR.x) {
             point.X += velocity
+            if (point.X > pointIR.x) {
+                point.X = pointIR.x
+            }
         }
 
         if (point.X == pointIL.x && point.X == pointSL.x && point.Y != pointIL.y) {
             point.Y -= velocity
+            if (point.Y < pointIL.y) {
+                point.Y = pointIL.y
+            }
         }
 
         if (point.Y == pointSL.y && point.Y == pointSR.y && point.X != pointSL.x) {
             point.X -= velocity
+            if (point.X < pointSL.x) {
+                point.X = pointSL.x
+            }
         }
 
         if (point.X == pointIR.x && point.X == pointSR.x && point.Y != pointSR.y) {
             point.Y += velocity
+            if (point.Y > pointSR.y) {
+                point.Y = pointSR.y
+            }
         }
     })
+}
+
+//NOTA: Funções de manipulação da velocidade #ASeparar
+function changeAmpere(){
+    ampere = batteryVolt/(resistanceRes + bulbRes)
+}
+
+rngBattery.addEventListener('change',(e)=>{
+    batteryVolt = +rngBattery.value
+    changeAmpere()
+})
+
+rngBulb.addEventListener('change',(e)=>{
+    bulbRes = +rngBulb.value
+    changeAmpere()
+})
+
+rngResistance.addEventListener('change',(e)=>{
+    bulbRes = +rngResistance.value
+    changeAmpere()
+})
+
+function toggleCircuit(){
+    if (toggleSwitch == 1) {
+        toggleSwitch = 0
+        btnCircuitSwitch.textContent = 'DESLIGADO'
+        boxes[1].img = bulbOff
+        boxes[3].img = switchOff
+    } else {
+        toggleSwitch = 1
+        btnCircuitSwitch.textContent = 'LIGADO'
+        boxes[1].img = bulbOn
+        boxes[3].img = switchOn
+    }
 }

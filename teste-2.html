@@ -13,32 +13,31 @@
         </div>
         <canvas width="500" height="500" style="border: 2px solid black; visibility: collapse;"></canvas>
         <div id="componentProperties" style="visibility: collapse;">
-            <!--NOTA: ISTO É APENAS UMA PROPOSTA DOS INPUTS A SEREM UTILIZADOS-->
             <h2>CONTROLAR COMPONENTES</h2>
             <div>
                 <h3>Interruptor</h3>
 
                 <label for="">Estado:</label>
-                <button>LIGADO</button>
+                <button id="switch" value="true" onclick="toggleCircuit()">LIGADO</button>
             </div>
 
             <div>
                 <h3>Lâmpada</h3>
                 <label for="">Resistência:</label>
                 <label>0 &#8486</label><br>
-                <input type="range" name="" id="">
+                <input type="range" name="bulb" id="bulb" min="0" max="120" value="10">
             </div>
             <div>
                 <h3>Pilha</h3>
                 <label for="">Tensão:</label>
                 <label>0 V</label><br>
-                <input type="range" name="" id="">
+                <input type="range" name="battery" id="battery" min="0" max="120" value="9">
             </div>
             <div>
                 <h3>Resistência</h3>
                 <label for="">Resistência:</label>
                 <label>0 &#8486</label><br>
-                <input type="range" name="" id="">
+                <input type="range" name="resistance" id="resistance" min="0" max="120" value="10">
             </div>
         </div>
         <button onclick="generatePath()">GENERATE PATH</button>
