@@ -480,9 +480,9 @@ setInterval(() =>
         }
         checkRequirements(boxes)
         //TODO: colocar um checkRequirements para um array de fios
-    } else if (phase == 3) {
+    } else if (phase == 3){
         tutorialText = ''
-        generatePath()
+        //generatePath()
     }
     generateText(tutorialText, W/2, 75)
     squareGrid.forEach(square => {
@@ -566,14 +566,13 @@ function path(local)
 {
     console.log("path");
 
-    let squareCheckItem = squareData(local); console.log(squareCheckItem[0]);
+    let squareCheckItem = squareData(local); //console.log(squareCheckItem);
 
     oldPathData = actualPathData;
     oldLocal = local;
 
     if (squareCheckItem[2] == 'Battery') 
     {
-        drawPoint(squareCheckItem[0], squareCheckItem[1])
         checkDir(local)
     } 
     else 
@@ -581,14 +580,15 @@ function path(local)
         checkDir(local)
     }
 
+    drawPoint(squareCheckItem[0], squareCheckItem[1])
 }
 
-function drawPoint(X,Y)
+function drawPoint(x,y)
 {
-    let pointX, pointY
-    pointX = X + pixelSizeX / 2; pointY = Y + pixelSizeY / 2;
+    let pointX = x + pixelSizeX / 2; let pointY = y + pixelSizeY / 2;
     points.push(new Point(pointX, pointY)); console.table(points);
 }
+
 
 var posNum = [-5,-1,5,1]
 let aceptablesItems = ['Bulb','Resistor','Switch','Wire']
