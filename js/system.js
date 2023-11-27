@@ -525,6 +525,10 @@ setInterval(() =>
     } catch (error) {
         
     }
+
+    if (bulbRes == 0){
+        boxes[1].img = bulbOff
+    } 
 }, 1);
 
 function generateTable() 
