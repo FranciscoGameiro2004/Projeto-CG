@@ -11,6 +11,10 @@ let bulbRes = 10
 let batteryVolt = 9
 let resistanceRes = 10
 let ampere = batteryVolt/(resistanceRes + bulbRes)
+//----------------------------------------------//
+let lblBulb = document.querySelector('#lblBulb')
+let lblBattery = document.querySelector('#lblBattery')
+let lblResistance = document.querySelector('#lblResistance')
 
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
@@ -802,16 +806,19 @@ function changeAmpere(){
 
 rngBattery.addEventListener('change',(e)=>{
     batteryVolt = +rngBattery.value
+    lblBattery.textContent = `${batteryVolt} V`
     changeAmpere()
 })
 
 rngBulb.addEventListener('change',(e)=>{
     bulbRes = +rngBulb.value
+    lblBulb.innerHTML = `${bulbRes} &#8486`
     changeAmpere()
 })
 
 rngResistance.addEventListener('change',(e)=>{
     bulbRes = +rngResistance.value
+    lblResistance.innerHTML = `${resistanceRes} &#8486`
     changeAmpere()
 })
 
