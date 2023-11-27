@@ -266,7 +266,6 @@ class Point {
 let points = new Array
 
 let buttons = new Array()
-menuBtn = new Button(W/2-65,H/4*3, 130,50, 'Começar', 1)
 
 let boxes = new Array()
 let colors = [null, null, null, null, 'red', 'red', 'red']
@@ -604,16 +603,21 @@ function checkDir(local)
                 break
             }
         }
+        if(squareGrid[local + posNum[i]].item == "Battery")
+        {
+            batteryEnd = true;
+            console.log(points.map( point => ({X: point.X, Y: point.Y})))
+        }
     }
 }
 
 
 function generatePath() 
 {
-    /*
+    
     while(batteryEnd == false)
     {
-    */
+    
         console.clear()
         if (Start == true) 
         {
@@ -640,7 +644,7 @@ function generatePath()
         
         // Atualiza o ponto anterior para a posição atual
         previousPoint = [actualPathData[0], actualPathData[1]]; console.log(previousPoint);
-    //}
+    }
 
 }
 
