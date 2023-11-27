@@ -2,6 +2,11 @@ const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 const W = canvas.width;
 const H = canvas.height;
+const button = document.querySelector('button');
+
+button.addEventListener('click', function(){
+    window.location.href = 'teste-2.html'
+})
 
 function drawCircuitLines() {
     ctx.strokeStyle = 'black';
