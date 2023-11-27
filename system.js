@@ -497,6 +497,12 @@ setInterval(() =>
     } else {
         componentProperties.style.visibility = 'visible'
     }
+
+    try {
+        animateElectrons()
+    } catch (error) {
+        
+    }
 }, 1);
 
 function generateTable() 
@@ -709,4 +715,25 @@ function determinePoints(){
     console.log(pointIR);
     console.log(pointSL);
     console.log(pointSR);
+}
+
+function animateElectrons(){
+    let velocity = 1
+    points.forEach(point => {
+        if (point.Y == pointIL.y && point.Y == pointIR.y && point.X != pointIR.x) {
+            point.X += velocity
+        }
+
+        if (point.X == pointIL.x && point.X == pointSL.x && point.Y != pointIL.y) {
+            point.Y -= velocity
+        }
+
+        if (point.Y == pointSL.y && point.Y == pointSR.y && point.X != pointSL.x) {
+            point.X -= velocity
+        }
+
+        if (point.X == pointIR.x && point.X == pointSR.x && point.Y != pointSR.y) {
+            point.Y += velocity
+        }
+    })
 }
