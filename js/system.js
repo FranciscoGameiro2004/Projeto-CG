@@ -480,8 +480,9 @@ setInterval(() =>
         }
         checkRequirements(boxes)
         //TODO: colocar um checkRequirements para um array de fios
-    } else {
+    } else if (phase == 3) {
         tutorialText = ''
+        generatePath()
     }
     generateText(tutorialText, W/2, 75)
     squareGrid.forEach(square => {
