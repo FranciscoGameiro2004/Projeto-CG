@@ -817,7 +817,7 @@ rngBulb.addEventListener('change',(e)=>{
 })
 
 rngResistance.addEventListener('change',(e)=>{
-    bulbRes = +rngResistance.value
+    resistanceRes = +rngResistance.value
     lblResistance.innerHTML = `${resistanceRes} &#8486`
     changeAmpere()
 })
