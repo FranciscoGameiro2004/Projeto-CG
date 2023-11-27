@@ -3,8 +3,14 @@ const ctx = canvas.getContext('2d');
 const W = canvas.width;
 const H = canvas.height;
 
+let pointIL = {x:0, y:0}
+let pointIR = {x:0, y:0}
+let pointSL = {x:0, y:0}
+let pointSR = {x:0, y:0}
+
 const componentProperties = document.querySelector('#componentProperties')
 
+let genPathFlag = true
 let addWires = true
 let phase = 0
 let tutorialText = ''
@@ -610,38 +616,42 @@ function checkDir(local)
 
 function generatePath() 
 {
-    
-    while(batteryEnd == false)
-    {
-    
-        console.clear()
-        if (Start == true) 
+    if (genPathFlag) {
+        while(batteryEnd == false)
         {
-            local = squareGrid.findIndex(square => square.item == "Battery");//console.log(local)
-            Start = false;
-        } 
-        else 
-        {
-            local = squareGrid.findIndex(square => square.x == actualPathData[0] && square.y == actualPathData[1]);//console.log(local);
-        }
         
-        // Se o ponto anterior existe, e se a próxima posição é diferente do ponto anterior, então prossegue com a criação do caminho
+            console.clear()
+            if (Start == true) 
+            {
+                local = squareGrid.findIndex(square => square.item == "Battery");//console.log(local)
+                Start = false;
+            } 
+            else 
+            {
+                local = squareGrid.findIndex(square => square.x == actualPathData[0] && square.y == actualPathData[1]);//console.log(local);
+            }
+            
+            // Se o ponto anterior existe, e se a próxima posição é diferente do ponto anterior, então prossegue com a criação do caminho
 
-        //console.log(actualPathData)
+            //console.log(actualPathData)
 
-        if (previousPoint && (previousPoint[0] !== actualPathData[0] || previousPoint[1] !== actualPathData[1])) 
-        {
-            path(local);
-        } 
-        else 
-        {
-            path(local); // Se não há ponto anterior ou a próxima posição é igual ao ponto anterior, ainda assim cria o caminho
+            if (previousPoint && (previousPoint[0] !== actualPathData[0] || previousPoint[1] !== actualPathData[1])) 
+            {
+                path(local);
+            } 
+            else 
+            {
+                path(local); // Se não há ponto anterior ou a próxima posição é igual ao ponto anterior, ainda assim cria o caminho
+            }
+            
+            // Atualiza o ponto anterior para a posição atual
+            previousPoint = [actualPathData[0], actualPathData[1]]; console.log(previousPoint);
         }
-        
-        // Atualiza o ponto anterior para a posição atual
-        previousPoint = [actualPathData[0], actualPathData[1]]; console.log(previousPoint);
+
+        determinePoints()
+
+        genPathFlag = false
     }
-
 }
 
 
