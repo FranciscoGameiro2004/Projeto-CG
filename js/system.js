@@ -1,3 +1,5 @@
+//import { Box, Button, Point } from './components.js';
+
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 const W = canvas.width;
@@ -23,37 +25,34 @@ var xInit = 0; var xEnd = 0;
 var yInit = 0; var yEnd = 0;
 
 
-switchOn = new Image()
+let switchOn = new Image()
 switchOn.src = 'assets/interruptor_aberto.png'
 
-switchOn = new Image()
-switchOn.src = 'assets/interruptor_fechado.png'
+let switchOff = new Image()
+switchOff.src = 'assets/interruptor_fechado.png'
 
-battery = new Image()
+let battery = new Image()
 battery.src = 'assets/pilha.png'
 
-bulbOn = new Image()
-bulbOn.src = 'assets/lampada_acesa.png'
-
-bulbOff = new Image()
+let bulbOff = new Image()
 bulbOff.src = 'assets/lampada_desligada.png'
 
-bulbOn = new Image()
+let bulbOn = new Image()
 bulbOn.src = 'assets/lampada_acesa.png'
 
-resistor = new Image()
+let resistor = new Image()
 resistor.src = 'assets/resistencia.png'
 
-wireSL = new Image()
+let wireSL = new Image()
 wireSL.src = 'assets/fioSE.png'
 
-wireSR = new Image()
+let wireSR = new Image()
 wireSR.src = 'assets/fioSD.png'
 
-wireIL = new Image()
+let wireIL = new Image()
 wireIL.src = 'assets/fioIE.png'
 
-wireIR = new Image()
+let wireIR = new Image()
 wireIR.src = 'assets/fioID.png'
 
 var squareCheck = null
@@ -66,6 +65,7 @@ var actualPathData = null
 var oldLocal = null
 var local = null
 var batteryEnd = false
+let image = null
 
 class gridBlock {
     constructor(posX, posY, Width, Height, img=null) {
@@ -264,19 +264,22 @@ class Point {
         ctx.fill();
     }
 }
+
 let points = new Array
 
 let buttons = new Array()
-menuBtn = new Button(W/2-65,H/4*3, 130,50, 'Começar', 1)
+let menuBtn = new Button(W/2-65,H/4*3, 130,50, 'Começar', 1)
 
 let boxes = new Array()
+/*
 let colors = [null, null, null, null, 'red', 'red', 'red']
 let compImg = [battery, bulbOff, resistor, switchOn, null, null, null]
 let designation = ['Battery', 'Bulb','Resistor','Switch','Wire','Wire','Wire']
-/*for (let i = 0; i < 8; i++)
+for (let i = 0; i < 8; i++)
 {
     boxes.push(new Box(0 + i * 75, 400, 50, 50, colors[i], compImg[i], designation[i], 125+50*i, 175))
-}*/
+}
+*/
 
 generateBoxComponents()
 
@@ -284,7 +287,7 @@ let squareGrid = new Array();
 for (let i = 0; i < gridSize; i++) 
 {
     for (let j = 0; j < gridSize; j++) {
-        let image = ''
+        image = ''
         try {
             let imgIndex = boxes.find(box => box.correctX == padding + pixelSizeX * j && box.correctY == padding + pixelSizeY * i)
             image = imgIndex.img
@@ -468,10 +471,13 @@ canvas.addEventListener('click', e =>{
 setInterval(() => 
 {
     ctx.clearRect(0, 0, W, H);
-    if (phase == 1){
+    if (phase == 1)
+    {
         tutorialText = 'Coloque os componentes nas suas áreas'
         checkRequirements(boxes)
-    } else if (phase == 2){
+    } 
+    else if (phase == 2)
+    {
         tutorialText = 'Conecte os componentes'
         if (addWires){
             //alert('ok')
@@ -480,7 +486,9 @@ setInterval(() =>
         }
         checkRequirements(boxes)
         //TODO: colocar um checkRequirements para um array de fios
-    } else if (phase == 3){
+    } 
+    else if (phase == 3)
+    {
         tutorialText = ''
         //generatePath()
     }
