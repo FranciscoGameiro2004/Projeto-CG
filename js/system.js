@@ -565,13 +565,14 @@ function path(local)
 {
     console.log("path");
 
-    let squareCheckItem = squareData(local); //console.log(squareCheckItem);
+    let squareCheckItem = squareData(local); console.log(squareCheckItem[0]);
 
     oldPathData = actualPathData;
     oldLocal = local;
 
     if (squareCheckItem[2] == 'Battery') 
     {
+        drawPoint(squareCheckItem[0], squareCheckItem[1])
         checkDir(local)
     } 
     else 
@@ -579,7 +580,12 @@ function path(local)
         checkDir(local)
     }
 
-    let pointX = actualPathData[0] + pixelSizeX / 2; let pointY = actualPathData[1] + pixelSizeY / 2;
+}
+
+function drawPoint(X,Y)
+{
+    let pointX, pointY
+    pointX = X + pixelSizeX / 2; pointY = Y + pixelSizeY / 2;
     points.push(new Point(pointX, pointY)); console.table(points);
 }
 
@@ -616,6 +622,7 @@ function checkDir(local)
 function generatePath() 
 {
     if (genPathFlag) {
+
         while(batteryEnd == false)
         {
         
