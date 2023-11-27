@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mapa Interativo</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+    #map {
+      height: 100vh; /* Utiliza toda a altura da janela */
+      width: 100%; /* Utiliza toda a largura da janela */
+    }
+  </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script>
+  var map = L.map('map', {
+    center: [51.505, -0.09], // coordenadas iniciais
+    zoom: 13, // nível de zoom inicial
+    maxBounds: [ // limites de movimento do mapa
+      [-90, -180],
+      [90, 180]
+    ],
+    maxBoundsViscosity: 1.0, // bloqueio de movimento vertical
+    minZoom: calculateMinZoom() // definindo o nível mínimo de zoom
+  });
+
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/">CARTO</a>',
+    subdomains: 'abcd',
+    maxZoom: 19
+  }).addTo(map);
+
+  // Exemplo de marcador no mapa
+  L.marker([51.5, -0.09]).addTo(map)
+    .bindPopup('Localização.').openPopup();
+
+  // Função para calcular o nível mínimo de zoom com base na altura do mapa
+  function calculateMinZoom() {
+    var minHeight = document.getElementById('map').offsetHeight;
+    var tileSize = 256; // tamanho padrão do tile no Leaflet
+    var minZoom = 0;
+    while ((tileSize * Math.pow(2, minZoom)) < minHeight) {
+      minZoom++;
+    }
+    return minZoom;
+  }
+</script>
+
+</body>
+</html>

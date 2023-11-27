@@ -49,13 +49,37 @@
       const canvas = document.getElementById('myCanvas');
       const ctx = canvas.getContext('2d');
 
-      const squarePath = [
-        { x: 100, y: 10 },
-        { x: 400, y: 300 },
-        { x: 400, y: 400 },
-        { x: 100, y: 320 },
-        { x: 10, y: 100 } // Volta para o ponto inicial para formar um loop
-      ];
+      const squarePath = 
+      [
+        {
+            "x": 200,
+            "y": 300
+        },
+        {
+            "x": 200,
+            "y": 250
+        },
+        {
+            "x": 200,
+            "y": 200
+        },
+        {
+            "x": 250,
+            "y": 200
+        },
+        {
+            "x": 300,
+            "y": 200
+        },
+        {
+            "x": 300,
+            "y": 250
+        },
+        {
+            "x": 300,
+            "y": 50
+        }
+      ]
 
       let index = 0; // Índice do próximo ponto no caminho
       let posX = squarePath[0].x;
