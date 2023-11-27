@@ -45,44 +45,26 @@
   </table>
 
   <script>
+    function calcularCoordenadasPoligono(lados, centerX, centerY, raio) {
+      const coordenadas = [];
+      const angulo = (Math.PI * 2) / lados;
+
+      for (let i = 0; i < lados; i++) {
+        const x = centerX + raio * Math.cos(i * angulo);
+        const y = centerY + raio * Math.sin(i * angulo);
+        coordenadas.push({ x, y });
+      }
+
+      return coordenadas;
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
       const canvas = document.getElementById('myCanvas');
       const ctx = canvas.getContext('2d');
 
-      const squarePath = [
-        {"x": 250, "y": 100},
-        {"x": 185, "y": 133},
-        {"x": 135, "y": 185},
-        {"x": 108, "y": 250},
-        {"x": 108, "y": 315},
-        {"x": 135, "y": 380},
-        {"x": 185, "y": 432},
-        {"x": 250, "y": 465},
-        {"x": 315, "y": 432},
-        {"x": 365, "y": 380},
-        {"x": 392, "y": 315},
-        {"x": 392, "y": 250},
-        {"x": 365, "y": 185},
-        {"x": 315, "y": 133},
-        {"x": 250, "y": 100},
-        {"x": 185, "y": 133},
-        {"x": 135, "y": 185},
-        {"x": 108, "y": 250},
-        {"x": 108, "y": 315},
-        {"x": 135, "y": 380},
-        {"x": 185, "y": 432},
-        {"x": 250, "y": 465},
-        {"x": 315, "y": 432},
-        {"x": 365, "y": 380},
-        {"x": 392, "y": 315},
-        {"x": 392, "y": 250},
-        {"x": 365, "y": 185},
-        {"x": 315, "y": 133}
-      ];
+      const squarePath = calcularCoordenadasPoligono(15, 250, 250, 200);
 
-
-
-      let index = 0; // Índice do próximo ponto no caminho
+      let index = 0;
       let posX = squarePath[0].x;
       let posY = squarePath[0].y;
       let targetX = squarePath[0].x;
@@ -94,8 +76,7 @@
         ctx.beginPath();
         ctx.arc(x, y, 5, 0, Math.PI * 2);
         ctx.fill();
-        
-        // Desenhar arco entre os pontos
+
         ctx.strokeStyle = 'blue';
         ctx.lineWidth = 2;
         for (let i = 0; i < squarePath.length - 1; i++) {
@@ -104,7 +85,6 @@
           ctx.lineTo(squarePath[i + 1].x, squarePath[i + 1].y);
           ctx.stroke();
         }
-        // Fechar o loop
         ctx.beginPath();
         ctx.moveTo(squarePath[squarePath.length - 1].x, squarePath[squarePath.length - 1].y);
         ctx.lineTo(squarePath[0].x, squarePath[0].y);
@@ -116,8 +96,7 @@
         const dy = targetY - posY;
 
         const distance = Math.sqrt(dx * dx + dy * dy);
-
-        const speed = 2; // Velocidade de movimento
+        const speed = 2;
 
         if (distance > speed) {
           posX += (dx / distance) * speed;
@@ -132,7 +111,6 @@
 
         drawPoint(posX, posY);
 
-        // Atualizar a tabela com os dados
         document.getElementById('posX').textContent = posX.toFixed(2);
         document.getElementById('posY').textContent = posY.toFixed(2);
         document.getElementById('dx').textContent = dx.toFixed(2);
