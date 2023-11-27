@@ -568,6 +568,7 @@ function path(local)
 
     let squareCheckItem = squareData(local); //console.log(squareCheckItem);
 
+    
     oldPathData = actualPathData;
     oldLocal = local;
 
@@ -579,7 +580,6 @@ function path(local)
     {
         checkDir(local)
     }
-
     drawPoint(squareCheckItem[0], squareCheckItem[1])
 }
 
