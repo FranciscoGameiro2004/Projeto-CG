@@ -25,8 +25,8 @@ var yInit = 0; var yEnd = 0;
 switchOn = new Image()
 switchOn.src = 'assets/interruptor_aberto.png'
 
-switchOff = new Image()
-switchOff.src = 'assets/interruptor_fechado.png'
+switchOn = new Image()
+switchOn.src = 'assets/interruptor_fechado.png'
 
 battery = new Image()
 battery.src = 'assets/pilha.png'
