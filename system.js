@@ -408,7 +408,7 @@ canvas.addEventListener('mouseup', (e) =>
                 }
             })
             box.grab = false
-            generateTable()
+            //generateTable()
         }
     })
 
@@ -607,7 +607,6 @@ function checkDir(local)
     }
 }
 
-
 function generatePath() 
 {
     
@@ -651,8 +650,7 @@ function squareData(index)
     return [squareGrid[index].x, squareGrid[index].y,squareGrid[index].item]
 }
 
-
-generateTable()
+//generateTable()
 console.clear()
 
 function checkRequirements(boxArray){
