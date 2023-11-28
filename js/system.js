@@ -313,7 +313,7 @@ for (let i = 0; i < 8; i++)
 }
 */
 
-generateBoxComponents()
+//generateBoxComponents()
 
 /*
 let squareGrid = new Array();
@@ -847,7 +847,6 @@ setInterval(() =>
             addWires = false
         }
         checkRequirements(boxes)
-        //TODO: colocar um checkRequirements para um array de fios
     } 
     else if (phase == 3)
     {
@@ -855,13 +854,16 @@ setInterval(() =>
         generatePath()
     }
     generateText(tutorialText, W/2, 75)
-    squareGrid.forEach(square => {
+    squareGrid.forEach(square => 
+    {   
         square.draw();
     });
-    boxes.forEach(box => {
+    boxes.forEach(box => 
+    {
         box.draw()
     });
-    points.forEach(point => {
+    points.forEach(point => 
+    {
         point.draw()
     });
     if (phase < 3) {
@@ -884,3 +886,8 @@ setInterval(() =>
         boxes[1].img = bulbOff
     } 
 }, 1);
+
+function teste()
+{
+    console.log("Testing")
+}

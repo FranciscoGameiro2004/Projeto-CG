@@ -1,7 +1,7 @@
 var squareGrid = []
-var boxes = [];
-var buttons = [];
-var points = [];
+
+
+
 
 class gridBlock {
     constructor(posX, posY, Width, Height, img=null) {
@@ -163,7 +163,7 @@ class Box{
         return false
     }
 }
-
+var boxes = [];
 
 class Button{
     constructor(x,y, w,h, text, phase) {
@@ -202,7 +202,7 @@ class Button{
         }
     }
 }
-
+var buttons = [];
 
 class Point {
     constructor(x,y){
@@ -219,3 +219,5 @@ class Point {
         ctx.fill();
     }
 }
+var points = [];
+

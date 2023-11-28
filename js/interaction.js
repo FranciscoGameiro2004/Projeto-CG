@@ -119,6 +119,7 @@ canvas.addEventListener('mouseup', (e) =>
 
 })
 
+/*
 canvas.addEventListener("click", (e) => 
 {
     //console.clear()
@@ -138,6 +139,7 @@ canvas.addEventListener("click", (e) =>
         }
     }
 })
+*/
 
 canvas.addEventListener('click', e =>{
     menuBtn.click(e)
