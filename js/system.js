@@ -1,5 +1,4 @@
-//import { Box, Button, Point } from './components.js';
-
+/*
 //NOTA: Variáveis que acrescentei para controlo de componentes para separar depois #ASeparar
 let btnCircuitSwitch = document.querySelector('#switch')
 let rngBulb = document.querySelector('#bulb')
@@ -15,32 +14,41 @@ let ampere = batteryVolt/(resistanceRes + bulbRes)
 let lblBulb = document.querySelector('#lblBulb')
 let lblBattery = document.querySelector('#lblBattery')
 let lblResistance = document.querySelector('#lblResistance')
+*/
 
+/*
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 const W = canvas.width;
 const H = canvas.height;
+*/
 
+/*
 let pointIL = {x:0, y:0}
 let pointIR = {x:0, y:0}
 let pointSL = {x:0, y:0}
 let pointSR = {x:0, y:0}
 
 const componentProperties = document.querySelector('#componentProperties')
+*/
 
+/*
 let genPathFlag = true
 let addWires = true
 let phase = 0
 let tutorialText = ''
 let padding = 125
+*/
 
+/*
 const gridSize = 5;
 const pixelSizeX = 250 / gridSize;
 const pixelSizeY = 250 / gridSize;
 var xInit = 0; var xEnd = 0;
 var yInit = 0; var yEnd = 0;
+*/
 
-
+/*
 let switchOff = new Image()
 switchOff.src = 'assets/interruptor_aberto.png'
 
@@ -70,7 +78,9 @@ wireIL.src = 'assets/fioIE.png'
 
 let wireIR = new Image()
 wireIR.src = 'assets/fioID.png'
+*/
 
+/*
 var squareCheck = null
 var originalPosX = 0
 var originalPosY = 0
@@ -82,7 +92,9 @@ var oldLocal = null
 var local = null
 var batteryEnd = false
 let image = null
+*/
 
+/*
 class gridBlock {
     constructor(posX, posY, Width, Height, img=null) {
         this.x = posX;
@@ -280,13 +292,17 @@ class Point {
         ctx.fill();
     }
 }
+*/
 
+/*
 let points = new Array
 
 let buttons = new Array()
 let menuBtn = new Button(W/2-65,H/4*3, 130,50, 'Começar', 1)
 
 let boxes = new Array()
+*/
+
 /*
 let colors = [null, null, null, null, 'red', 'red', 'red']
 let compImg = [battery, bulbOff, resistor, switchOn, null, null, null]
@@ -299,6 +315,7 @@ for (let i = 0; i < 8; i++)
 
 generateBoxComponents()
 
+/*
 let squareGrid = new Array();
 for (let i = 0; i < gridSize; i++) 
 {
@@ -315,10 +332,14 @@ for (let i = 0; i < gridSize; i++)
 }
 //console.log(squareGrid[0]);
 //console.log(squareGrid[squareGrid.length -1])
+*/
 
+/*
 xInit = squareGrid[0].x; xEnd = squareGrid[squareGrid.length -1].x + pixelSizeX; //console.log(`x vai de ${xInit} até ${xEnd}`);
 yInit = squareGrid[0].y; yEnd = squareGrid[squareGrid.length -1].y + pixelSizeY; //console.log(`y vai de ${yInit} até ${yEnd}`);
+*/
 
+/*
 canvas.addEventListener('mousemove', (e) => 
 {
     //console.clear()
@@ -437,17 +458,8 @@ canvas.addEventListener('mouseup', (e) =>
         }
     })
 
-    /*
-    boxes.forEach(box => 
-    {
-        box.grab = false
-        box.lockStatus()
-
-    });
-    */
 
 })
-
 
 canvas.addEventListener("click", (e) => 
 {
@@ -468,8 +480,9 @@ canvas.addEventListener("click", (e) =>
         }
     }
 })
+*/
 
-
+/*
 function drawMenu(){
     ctx.fillStyle = 'black'
     ctx.font = '30px Arial Black'
@@ -479,62 +492,15 @@ function drawMenu(){
     
     menuBtn.draw()
 }
+*/
 
+/*
 canvas.addEventListener('click', e =>{
     menuBtn.click(e)
 })
+*/
 
-setInterval(() => 
-{
-    ctx.clearRect(0, 0, W, H);
-    if (phase == 1)
-    {
-        tutorialText = 'Coloque os componentes nas suas áreas'
-        checkRequirements(boxes)
-    } 
-    else if (phase == 2)
-    {
-        tutorialText = 'Conecte os componentes'
-        if (addWires){
-            //alert('ok')
-            generateBoxWires()
-            addWires = false
-        }
-        checkRequirements(boxes)
-        //TODO: colocar um checkRequirements para um array de fios
-    } 
-    else if (phase == 3)
-    {
-        tutorialText = ''
-        generatePath()
-    }
-    generateText(tutorialText, W/2, 75)
-    squareGrid.forEach(square => {
-        square.draw();
-    });
-    boxes.forEach(box => {
-        box.draw()
-    });
-    points.forEach(point => {
-        point.draw()
-    });
-    if (phase < 3) {
-        componentProperties.style.visibility = 'collapse'
-    } else {
-        componentProperties.style.visibility = 'visible'
-    }
-
-    try {
-        animateElectrons()
-    } catch (error) {
-        
-    }
-
-    if (bulbRes == 0){
-        boxes[1].img = bulbOff
-    } 
-}, 1);
-
+/*
 function generateTable() 
 {
     let tbl = document.getElementById("tabela");//console.log(tbl);
@@ -579,7 +545,9 @@ function generateTable()
     }
         tbl.setAttribute("border", "2");
 }
+*/
 
+/*
 function generateText(text, x,y){
     ctx.fillStyle = 'black'
     ctx.font = '20px Arial'
@@ -587,7 +555,9 @@ function generateText(text, x,y){
     ctx.textBaseline = 'middle'
     ctx.fillText(text, x, y)
 }
+*/
 
+/*
 let previousPoint = null; // Mantém o ponto anterior
 
 function path(local) 
@@ -617,9 +587,9 @@ function drawPoint(x,y)
     points.push(new Point(pointX, pointY)); console.table(points);
 }
 
-
 var posNum = [-5,-1,5,1]
 let aceptablesItems = ['Bulb','Resistor','Switch','Wire']
+
 function checkDir(local) 
 {
     for (let i = 0; i < posNum.length; i++) {
@@ -694,47 +664,56 @@ function generatePath()
     }
 }
 
-
 function squareData(index)
 {
     //console.log(`X: ${squareGrid[index].x} | Y: ${squareGrid[index].y}`)
     return [squareGrid[index].x, squareGrid[index].y,squareGrid[index].item]
 }
+*/
 
-//generateTable()
-console.clear()
-
+/*
 function checkRequirements(boxArray){
     if (boxArray.every(box=>box.correctPlace)){
         phase += 1
         boxArray.forEach(box=>box.doesMove = false)
     }
 }
+*/
 
+/*
 function btnClick(){
     phase += 1
     canvas.style.visibility = 'visible'
     document.querySelector('#menu').style.visibility = 'collapse'
 }
+*/
 
 //'Battery', 'Bulb','Resistor','Switch','Wire','Wire','Wire'
 //battery, bulbOff, resistor, switchOn
 
-function generateBoxComponents(){
+/*
+function generateBoxComponents()
+{
     boxes.push(new Box(0 + 0 * 75, 400, 50, 50, null, battery, 'Battery', 225, 275))
     boxes.push(new Box(0 + 1 * 75, 400, 50, 50, null, bulbOff, 'Bulb', 225, 175))
     boxes.push(new Box(0 + 2 * 75, 400, 50, 50, null, resistor, 'Resistor', 175, 225))
     boxes.push(new Box(0 + 3 * 75, 400, 50, 50, null, switchOn, 'Switch', 275, 225))
 }
+*/
 
-function generateBoxWires(){
+/*
+function generateBoxWires()
+{
     boxes.push(new Box(0 + 0 * 75, 400, 50, 50, null, wireSL, 'Wire', 175, 175))
     boxes.push(new Box(0 + 1 * 75, 400, 50, 50, null, wireSR, 'Wire', 275, 175))
     boxes.push(new Box(0 + 2 * 75, 400, 50, 50, null, wireIL, 'Wire', 175, 275))
     boxes.push(new Box(0 + 3 * 75, 400, 50, 50, null, wireIR, 'Wire', 275, 275))
 }
+*/
 
-function determinePoints(){
+/*
+function determinePoints()
+{
     let biggestX = -999
     let biggestY = -999
     let lowestX = 999
@@ -765,8 +744,11 @@ function determinePoints(){
     console.log(pointSL);
     console.log(pointSR);
 }
+*/
 
-function animateElectrons(){
+/*
+function animateElectrons()
+{
     let velocity = ampere*toggleSwitch
     points.forEach(point => {
         if (point.Y == pointIL.y && point.Y == pointIR.y && point.X != pointIR.x) {
@@ -798,12 +780,17 @@ function animateElectrons(){
         }
     })
 }
+*/
 
+/*
 //NOTA: Funções de manipulação da velocidade #ASeparar
-function changeAmpere(){
+function changeAmpere()
+{
     ampere = batteryVolt/(resistanceRes + bulbRes)
 }
+*/
 
+/*
 rngBattery.addEventListener('change',(e)=>{
     batteryVolt = +rngBattery.value
     lblBattery.textContent = `${batteryVolt} V`
@@ -821,8 +808,11 @@ rngResistance.addEventListener('change',(e)=>{
     lblResistance.innerHTML = `${resistanceRes} &#8486`
     changeAmpere()
 })
+*/
 
-function toggleCircuit(){
+/*
+function toggleCircuit()
+{
     if (toggleSwitch == 1) {
         toggleSwitch = 0
         btnCircuitSwitch.textContent = 'DESLIGADO'
@@ -835,3 +825,62 @@ function toggleCircuit(){
         boxes[3].img = switchOn
     }
 }
+*/
+
+
+//generateTable()
+console.clear()
+setInterval(() => 
+{
+    ctx.clearRect(0, 0, W, H);
+    if (phase == 1)
+    {
+        tutorialText = 'Coloque os componentes nas suas áreas'
+        checkRequirements(boxes)
+    } 
+    else if (phase == 2)
+    {
+        tutorialText = 'Conecte os componentes'
+        if (addWires){
+            //alert('ok')
+            generateBoxWires()
+            addWires = false
+        }
+        checkRequirements(boxes)
+        //TODO: colocar um checkRequirements para um array de fios
+    } 
+    else if (phase == 3)
+    {
+        tutorialText = ''
+        generatePath()
+    }
+    generateText(tutorialText, W/2, 75)
+    squareGrid.forEach(square => {
+        square.draw();
+    });
+    boxes.forEach(box => {
+        box.draw()
+    });
+    points.forEach(point => {
+        point.draw()
+    });
+    if (phase < 3) {
+        componentProperties.style.visibility = 'collapse'
+    } else {
+        componentProperties.style.visibility = 'visible'
+    }
+
+    try 
+    {
+        animateElectrons()
+    } 
+    catch (error) 
+    {
+        throw error
+    }
+
+    if (bulbRes == 0)
+    {
+        boxes[1].img = bulbOff
+    } 
+}, 1);

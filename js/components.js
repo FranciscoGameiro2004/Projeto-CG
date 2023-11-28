@@ -1,3 +1,79 @@
+var squareGrid = []
+var boxes = [];
+var buttons = [];
+var points = [];
+
+class gridBlock {
+    constructor(posX, posY, Width, Height, img=null) {
+        this.x = posX;
+        this.y = posY;
+        this.width = Width;
+        this.height = Height;
+        this.mouseOver = false;
+        this.available = true;
+        this.item=null;
+        this.img=img;
+    }
+
+    draw() 
+    {
+        ctx.beginPath();
+        ctx.strokeStyle = 'black';
+        ctx.fillStyle = 'cyan';
+        ctx.lineWidth = 1;
+        if (this.mouseOver) {
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+            ctx.globalAlpha = 0.9
+        } else {
+            ctx.globalAlpha = 0.35;
+        }
+        if (this.img != null && this.img != undefined){
+            ctx.drawImage(this.img, this.x,this.y, this.width,this.height);
+        }
+        ctx.globalAlpha = 1;
+        ctx.strokeRect(this.x, this.y, this.width, this.height);
+    }
+
+    checkHover(mouse)
+    {
+        let x = mouse.offsetX; 
+        let y = mouse.offsetY; 
+        //console.log(x, y);
+
+        if (
+            x > this.x &&
+            x < this.x + this.width &&
+            y > this.y && 
+            y < this.y + this.height
+            )
+        {
+            this.mouseOver = true
+            return [this.x, this.y]
+        } else {
+            this.mouseOver = false
+            return null
+        }
+    }
+
+}
+
+for (let i = 0; i < gridSize; i++) 
+{
+    for (let j = 0; j < gridSize; j++) {
+        image = ''
+        try {
+            let imgIndex = boxes.find(box => box.correctX == padding + pixelSizeX * j && box.correctY == padding + pixelSizeY * i)
+            image = imgIndex.img
+        } catch (error) {
+            image = null
+        }
+        squareGrid.push(new gridBlock(padding + pixelSizeX * j, padding + pixelSizeY * i, pixelSizeX, pixelSizeY, img=image));
+    }
+}
+
+xInit = squareGrid[0].x; xEnd = squareGrid[squareGrid.length -1].x + pixelSizeX; //console.log(`x vai de ${xInit} até ${xEnd}`);
+yInit = squareGrid[0].y; yEnd = squareGrid[squareGrid.length -1].y + pixelSizeY; //console.log(`y vai de ${yInit} até ${yEnd}`);
+
 class Box{
     constructor(posX,posY, Width,Height, color=null, img=null,item, correctX=undefined, correctY=undefined) {
         this.x = posX
@@ -88,7 +164,8 @@ class Box{
     }
 }
 
-export class Button{
+
+class Button{
     constructor(x,y, w,h, text, phase) {
         this.x = x
         this.y = y
@@ -126,7 +203,8 @@ export class Button{
     }
 }
 
-export class Point {
+
+class Point {
     constructor(x,y){
         this.X = x;
         this.Y = y;
