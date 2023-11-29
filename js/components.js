@@ -219,10 +219,7 @@ class Point {
         this.End = 2 * Math.PI
     }
     draw(){
-        ctx.beginPath();
-        ctx.arc(this.X, this.Y, this.Radius, this.Start, this.End);
-        ctx.fillStyle = "black"
-        ctx.fill();
+        ctx.drawImage(electron, this.X-this.Radius, this.Y-this.Radius, this.Radius*2,this.Radius*2)
     }
 }
 var points = [];

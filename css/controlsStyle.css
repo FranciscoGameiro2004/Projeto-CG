@@ -1,0 +1,20 @@
+#componentProperties{
+    padding-left: 10px;
+}
+
+#componentProperties, #menu, footer{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#alert{
+    color:red
+}
+
+#container{
+    display: flex;
+    justify-content: center;
+}
+
+#menu{
+    padding-left: 741.41px;
+}

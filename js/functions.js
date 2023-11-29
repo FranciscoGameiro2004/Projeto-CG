@@ -240,7 +240,7 @@ function determinePoints()
 
 function animateElectrons()
 {
-    let velocity = ampere*toggleSwitch
+    let velocity = ampere*toggleSwitch*0.75
     points.forEach(point => {
         if (point.Y == pointIL.y && point.Y == pointIR.y && point.X != pointIR.x) {
             point.X += velocity
@@ -275,7 +275,8 @@ function animateElectrons()
 //NOTA: Funções de manipulação da velocidade #ASeparar
 function changeAmpere()
 {
-    ampere = batteryVolt/(resistanceRes + bulbRes)
+    ampere = batteryVolt/(resistanceRes + bulbRes)*toggleSwitch
+    document.querySelector('#currentCurrent').textContent = `Corrente: ${ampere} Ampere${ampere != 1 ? 's' : ''}`
 }
 
 function toggleCircuit()
@@ -290,5 +291,29 @@ function toggleCircuit()
         btnCircuitSwitch.textContent = 'LIGADO'
         boxes[1].img = bulbOn
         boxes[3].img = switchOn
+    }
+    changeAmpere()
+}
+
+function batteryOnFire() {
+    if (ampere > 15) {
+        if (toggleSwitch == 1){
+            boxes[1].img = bulbOff
+            generateFire()
+        }
+        document.querySelector('#alert').style.visibility = 'visible'
+    } else {
+        boxes[1].img = bulbOn
+        document.querySelector('#alert').style.visibility = 'collapse'
+    }
+}
+
+function generateFire(){
+    let frame =  Math.floor(fireFrame/10)
+    ctx.drawImage(fireSprite, frame*20, 0, 20, 24, 225,245, 50,50)
+    if (fireFrame === 80){
+        fireFrame = 0
+    } else {
+        fireFrame++
     }
 }

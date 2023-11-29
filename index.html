@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/landingPage.css">
+    <link rel="stylesheet" href="./css/controlsStyle.css">
+</head>
+<body>
+    <div id="container">
+        <div id="innerCont" style="display: flex; flex-direction: row;">
+            <div>
+            <div id="menu" style="width: 500px; height: 500px;">
+                <!--<h1>Construção de um Circuito</h1>
+                <button onclick="btnClick()">COMEÇAR</button>-->
+                <div class="canvas-container" style="display: flex; flex-direction: row;">
+                    <canvas id="canvasMenu" width="500" height="500" style="border: 2px solid black;"></canvas>
+                    <h1 class="header">Construção de um circuito elétrico</h1>
+                    <button id="startButton" onclick="btnClick()">COMEÇAR</button>
+                </div>
+                <img id="eletrao2" width="30" height="30" src="./assets/eletrao.png">
+        <img id="eletrao3" width="30" height="30" src="./assets/eletrao.png">
+        <img id="eletrao4" width="30" height="30" src="./assets/eletrao.png">
+        <img id="eletrao5" width="30" height="30" src="./assets/eletrao.png">
+        <img id="eletrao6" width="30" height="30" src="./assets/eletrao.png">
+        <img id="eletrao7" width="30" height="30" src="./assets/eletrao.png">
+        <img id="eletrao8" width="30" height="30" src="./assets/eletrao.png">
+        <img id="eletrao9" width="30" height="30" src="./assets/eletrao.png">
+        <img id="eletrao10" width="30" height="30" src="./assets/eletrao.png">
+        <img id="eletrao11" width="30" height="30" src="./assets/eletrao.png">
+            </div>
+        </div>
+            <canvas width="500" height="500" style="border: 2px solid black; visibility: collapse;"></canvas>
+            <div id="componentProperties" style="visibility: collapse;">
+                <h2>CONTROLAR COMPONENTES</h2>
+                <div>
+                    <h3>Interruptor</h3>
+
+                    <label for="">Estado:</label>
+                    <button id="switch" value="true" onclick="toggleCircuit()">LIGADO</button>
+                </div>
+
+                <div>
+                    <h3>Lâmpada</h3>
+                    <label for="">Resistência:</label>
+                    <label id="lblBulb">10 &#8486</label><br>
+                    <input type="range" name="bulb" id="bulb" min="0" max="120" value="10">
+                </div>
+                <div>
+                    <h3>Pilha</h3>
+                    <label for="">Tensão:</label>
+                    <label id="lblBattery">9 V</label><br>
+                    <input type="range" name="battery" id="battery" min="0" max="120" value="9">
+                </div>
+                <div>
+                    <h3>Resistência</h3>
+                    <label for="">Resistência:</label>
+                    <label id="lblResistance">10 &#8486</label><br>
+                    <input type="range" name="resistance" id="resistance" min="1" max="120" value="10">
+                </div>
+                <hr>
+                <div id="currentCurrent">
+                    Corrente: 0.45 Amperes
+                </div>
+                <div>
+                    <h2 id="alert" style="visibility: collapse;">A pilha não aguenta a corrente!</h2>
+                </div>
+            </div>
+            <button onclick="generatePath()" style="visibility: collapse;">GENERATE PATH</button>
+            <table id="tabela"></table>
+        </div>
+    </div>
+    <script src="./js/landingPage.js"></script>
+    <script src="./js/images.js"></script>
+    <script src="./js/globalVariables.js"></script>
+    <script src="./js/interaction.js"></script>
+    <script src="./js/components.js"></script>
+    <script src="./js/functions.js"></script>
+    <script src="./js/system.js"></script>
+    <br>
+    <br>
+    <footer>
+        Trabalho feito por:
+        <ul>
+            <li><b>Benson Terra</b></li>
+            <li><b>Francisco Gameiro</b></li>
+            <li><b>Rui Ramos</b></li>
+        </ul>
+        Sprite de fogo utilizado: <a href="https://brullov.itch.io/fire-animation">Itch.Io</a>
+    </footer>
+</body>
+</html>

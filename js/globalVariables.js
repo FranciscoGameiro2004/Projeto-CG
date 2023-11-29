@@ -52,3 +52,5 @@ var image = null
 
 var posNum = [-5,-1,5,1]
 var aceptablesItems = ['Bulb','Resistor','Switch','Wire']
+
+var fireFrame = 0

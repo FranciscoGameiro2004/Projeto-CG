@@ -27,3 +27,9 @@ wireIL.src = './assets/fioIE.png'
 
 var wireIR = new Image()
 wireIR.src = './assets/fioID.png'
+
+var fireSprite = new Image()
+fireSprite.src = './assets/sprite_fogo.png'
+
+var electron = new Image()
+electron.src="./assets/eletrao.png"
