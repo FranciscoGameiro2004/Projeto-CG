@@ -186,7 +186,6 @@ function btnClick()
     canvas.style.visibility = 'visible'
     document.querySelector('#menu').style.visibility = 'collapse'
     generateBoxComponents()
-    console.log(boxes)
 }
 
 

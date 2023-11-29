@@ -1,8 +1,5 @@
 var squareGrid = []
 
-
-
-
 class gridBlock {
     constructor(posX, posY, Width, Height, img=null) {
         this.x = posX;
