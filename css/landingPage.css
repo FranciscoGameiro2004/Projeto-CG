@@ -238,10 +238,16 @@
     display: block;
 }
 
-.header, #startButton {
+#startButton {
     position: absolute;
     left: 17%;
-    transform: translateX(-50%);
+    transform: translateX(+50%);
+    z-index: 2;
+}
+
+.header {
+    position: absolute;
+    left: 17%;
     z-index: 2;
 }
 

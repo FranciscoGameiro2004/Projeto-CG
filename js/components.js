@@ -66,6 +66,15 @@ for (let i = 0; i < gridSize; i++)
             image = imgIndex.img
         } catch (error) {
             image = null
+            if (padding + pixelSizeX * j == 225 && padding + pixelSizeY * i == 275){
+                image = battery
+            } else if (padding + pixelSizeX * j == 225 && padding + pixelSizeY * i == 175){
+                image = bulbOff
+            } else if (padding + pixelSizeX * j == 175 && padding + pixelSizeY * i == 225){
+                image = resistor
+            } else if (padding + pixelSizeX * j == 275 && padding + pixelSizeY * i == 225){
+                image = switchOn
+            }
         }
         squareGrid.push(new gridBlock(padding + pixelSizeX * j, padding + pixelSizeY * i, pixelSizeX, pixelSizeY, img=image));
     }

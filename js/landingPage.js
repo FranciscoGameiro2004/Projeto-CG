@@ -1,7 +1,7 @@
-const canvas = document.querySelector('canvas');
-const ctx = canvas.getContext('2d');
-const W = canvas.width;
-const H = canvas.height;
+const canvasMenu = document.querySelector('#canvasMenu');
+const ctxMenu = canvasMenu.getContext('2d');
+const Wid = canvasMenu.width;
+const Hei = canvasMenu.height;
 
 function drawCircuitLines() {
     ctx.strokeStyle = 'black';
@@ -10,32 +10,31 @@ function drawCircuitLines() {
     const outerSpacing = 35;
 
     // Outer left line
-    ctx.beginPath();
-    ctx.moveTo(W / 8, H);
-    ctx.lineTo(W / 8, H / 2);
-    ctx.lineTo(W / 2, H / 2);
-    ctx.stroke();
+    ctxMenu.beginPath();
+    ctxMenu.moveTo(Wid / 8, Hei);
+    ctxMenu.lineTo(Wid / 8, Hei / 2);
+    ctxMenu.lineTo(Wid / 2, Hei / 2);
+    ctxMenu.stroke();
 
     // Outer right line
-    ctx.beginPath();
-    ctx.moveTo((W / 8) * 7, H);
-    ctx.lineTo((W / 8) * 7, H / 2);
-    ctx.lineTo(W / 2, H / 2);
-    ctx.stroke();
+    ctxMenu.beginPath();
+    ctxMenu.moveTo((Wid / 8) * 7, Hei);
+    ctxMenu.lineTo((Wid / 8) * 7, Hei / 2);
+    ctxMenu.lineTo(Wid / 2, Hei / 2);
+    ctxMenu.stroke();
 
     // Inner left line
-    ctx.beginPath();
-    ctx.moveTo(W / 8 - outerSpacing, H);
-    ctx.lineTo(W / 8 - outerSpacing, H / 2 - outerSpacing);
-    ctx.lineTo(W / 2, H / 2 - outerSpacing);
-    ctx.stroke();
+    ctxMenu.beginPath();
+    ctxMenu.moveTo(Wid / 8 - outerSpacing, Hei);
+    ctxMenu.lineTo(Wid / 8 - outerSpacing, Hei / 2 - outerSpacing);
+    ctxMenu.lineTo(Wid / 2, Hei / 2 - outerSpacing);
+    ctxMenu.stroke();
 
     // Inner right line
-    ctx.beginPath();
-    ctx.moveTo((W / 8) * 7 + outerSpacing, H);
-    ctx.lineTo((W / 8) * 7 + outerSpacing, H / 2 - outerSpacing);
-    ctx.lineTo(W / 2, H / 2 - outerSpacing);
-    ctx.stroke();
+    ctxMenu.beginPath();
+    ctxMenu.moveTo((Wid / 8) * 7 + outerSpacing, Hei);
+    ctxMenu.lineTo((Wid / 8) * 7 + outerSpacing, Hei / 2 - outerSpacing);
+    ctxMenu.lineTo(Wid / 2, Hei / 2 - outerSpacing);
+    ctxMenu.stroke();
 }
 
-drawCircuitLines();

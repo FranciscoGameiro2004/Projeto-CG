@@ -833,6 +833,7 @@ console.clear()
 setInterval(() => 
 {
     ctx.clearRect(0, 0, W, H);
+    if (phase != 0){
     if (phase == 1)
     {
         tutorialText = 'Coloque os componentes nas suas áreas'
@@ -884,7 +885,10 @@ setInterval(() =>
     if (bulbRes == 0)
     {
         boxes[1].img = bulbOff
-    } 
+    }
+    } else {
+        drawCircuitLines();
+    }
 }, 1);
 
 function teste()
