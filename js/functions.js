@@ -303,7 +303,6 @@ function batteryOnFire() {
         }
         document.querySelector('#alert').style.visibility = 'visible'
     } else {
-        boxes[1].img = bulbOn
         document.querySelector('#alert').style.visibility = 'collapse'
     }
 }
